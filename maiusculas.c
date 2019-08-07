@@ -11,15 +11,12 @@ int main(){
     char frase[TAM];
     char flag[] = "FIM";
 
-    scanf("%[^'\n']s", frase);
-    printf("%s\n", frase);
+    scanf("\n %[^\n]", frase);
     while(!stringCompare(frase, flag)){
         int numMaiusculas = quantasMaiusculas(frase, TAM);
-        printf("%s", frase);
         printf("%i\n", numMaiusculas);
-        scanf("%[^'\n']s", frase);
+        scanf("\n %[^\n]", frase);
     }
-
     return 0;
 }
 
