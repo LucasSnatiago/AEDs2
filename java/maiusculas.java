@@ -2,19 +2,19 @@ public class maiusculas{
     public static void main(String[] args) {
         int numMaiusculas = 0;
 
-        String entrada = MyIO.readLine();
-        while(!stringCompare("FIM", entrada)){
+        String entrada = MyIO.readLine();  //Ler valores
+        while(!stringCompare("FIM", entrada)){  //Repetir ate ser escrito "FIM"
 
             numMaiusculas = quantasMaiusculas(entrada);
 
-            MyIO.println(numMaiusculas);
+            MyIO.println(numMaiusculas);  //Escrever o numero de maiusculas em uma frase
 
             entrada = MyIO.readLine();
         }
     
     }
 
-    public static int quantasMaiusculas(String frase){
+    public static int quantasMaiusculas(String frase){  //Contador de maiusculas em uma frase
         int tamanhoFrase = frase.length();
         int quantasMaiusculas = 0;
 
@@ -26,7 +26,7 @@ public class maiusculas{
     }
 
 
-    public static boolean ehMaiusculo(char c){
+    public static boolean ehMaiusculo(char c){  //Checar se uma letra eh maiuscula
         boolean ehMaiusculo = false;
 
         if(c >= 'A' && c <= 'Z') ehMaiusculo = true;
@@ -34,7 +34,7 @@ public class maiusculas{
         return ehMaiusculo;
     }
 
-    public static boolean stringCompare(String frase1, String frase2){
+    public static boolean stringCompare(String frase1, String frase2){ //Comparador de strings (Feito para checar a palavra "FIM")
         boolean stringCompare = true;
         int tamanhoFrase1 = frase1.length();
         int tamanhoFrase2 = frase2.length();
