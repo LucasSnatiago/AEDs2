@@ -11,13 +11,13 @@ int main(){
     char frase[TAM];
     char flag[] = "FIM";
 
-    fgets(frase, TAM, stdin);
+    scanf("%[^'\n']s", frase);
     printf("%s\n", frase);
     while(!stringCompare(frase, flag)){
         int numMaiusculas = quantasMaiusculas(frase, TAM);
         printf("%s", frase);
         printf("%i\n", numMaiusculas);
-        fgets(frase, TAM, stdin);
+        scanf("%[^'\n']s", frase);
     }
 
     return 0;
@@ -47,7 +47,7 @@ int ehMaiuscula(char letra){
 int stringCompare(char *frase1, char *frase2){
     int stringCompare = 1;
 
-    for(int i = 0; i < 3; i++){
+    for(int i = 0; i < 4; i++){
         if(frase1[i] != frase2[i]) stringCompare = 0;
     }
 
