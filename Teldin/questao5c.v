@@ -1,3 +1,6 @@
+//Aluno: Lucas Santiago de Oliveira
+//Matricula: 650888
+
 module conversor;
 
 reg[8:0][7:0]  puc = "PUC-Minas";

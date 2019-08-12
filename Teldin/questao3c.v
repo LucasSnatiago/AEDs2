@@ -1,3 +1,6 @@
+//Aluno: Lucas Santiago de Oliveira
+//Matricula: 650888
+
 module conversor;
 
 reg[6:0] a = 77;

@@ -1,3 +1,6 @@
+//Aluno: Lucas Santiago de Oliveira
+//Matricula: 650888
+
 module dec2bin;
 
 reg[7:0] a = 25;

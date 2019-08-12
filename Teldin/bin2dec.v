@@ -1,3 +1,6 @@
+//Aluno: Lucas Santiago de Oliveira
+//Matricula: 650888
+
 module bin2dec;
 
 reg[4:0] a = 'b11001;
