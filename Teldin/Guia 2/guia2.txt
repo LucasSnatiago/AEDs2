@@ -1,0 +1,178 @@
+Aluno: Lucas Santiago de Oliveira
+Matricula: 650888
+
+
+1) 
+
+a.) 
+	0.10101(2) = 0.65625(10)
+
+
+module Guia2_1a;
+
+real resp = 0;
+real numero = 1.0;
+reg[4:0] a = 'b10101;
+integer contador = 4;
+
+
+initial
+begin: main
+	
+	while(contador >= 0)
+	begin
+		numero = numero / 2.0;
+		if (a[contador] == 1)
+		begin
+			resp = resp + numero;
+		end
+		contador = contador - 1;
+	end
+	
+	$display("a = %f", resp);
+	
+
+end
+endmodule
+
+
+
+b.)
+	0.01100(2) = 0.375(10)
+
+
+
+module Guia2_1b;
+
+real resp = 0;
+real numero = 1.0;
+reg[4:0] b = 'b01100;
+integer contador = 4;
+
+
+initial
+begin: main
+	
+	while(contador >= 0)
+	begin
+		numero = numero / 2.0;
+		if (b[contador] == 1)
+		begin
+			resp = resp + numero;
+		end
+		contador = contador - 1;
+	end
+	
+	$display("b = %f", resp);
+	
+
+end
+endmodule
+
+
+c.)
+	0.01010(2) = 0.3125(10)
+
+
+
+module Guia2_1c;
+
+real resp = 0;
+real numero = 1.0;
+reg[4:0] c = 'b01010;
+integer contador = 4;
+
+initial
+begin: main
+	
+	while(contador >= 0)
+	begin
+		numero = numero / 2.0;
+		if (c[contador] == 1)
+		begin
+			resp = resp + numero;
+		end
+		contador = contador - 1;
+	end
+	
+	$display("c = %f", resp);
+	
+
+end
+endmodule
+
+
+d.)
+	1.01011(2) = 1.34375(10)
+
+
+
+module Guia2_1d;
+
+real resp = 0;
+real numero = 1.0;
+reg[4:0] d = 'b01011;
+integer contador = 4;
+
+
+initial
+begin: main
+	
+	while(contador >= 0)
+	begin
+		numero = numero / 2.0;
+		if (d[contador] == 1)
+		begin
+			resp = resp + numero;
+		end
+		contador = contador - 1;
+	end
+
+	resp = resp + 1;
+	
+	$display("d = %f", resp);
+	
+
+end
+endmodule
+
+
+
+e.)
+	11.10010(2) = 3.34375(10)
+
+
+
+module Guia2_1e;
+
+real resp = 0;
+real numero = 1.0;
+reg[4:0] e = 'b01011;
+integer contador = 4;
+
+
+initial
+begin: main
+	
+	while(contador >= 0)
+	begin
+		numero = numero / 2.0;
+		if (e[contador] == 1)
+		begin
+			resp = resp + numero;
+		end
+		contador = contador - 1;
+	end
+	
+	resp = resp + 3;
+
+	$display("e = %f", resp);
+	
+
+end
+endmodule
+
+
+
+2
+
