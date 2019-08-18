@@ -176,3 +176,294 @@ endmodule
 
 2
 
+a.)
+
+
+	0.06250(10) = 0.0001(2)
+
+
+module double2bin;
+
+real double = 0.06250; 
+integer contador = 7;
+reg[7:0] bin = 0;
+
+
+
+initial
+begin : main
+
+	while(double > 0 && bin >= 0)
+	begin
+		if(double*2.0 >= 1.0)
+		begin
+			bin[contador] = 1.0;
+			double = double*2.0 - 1.0;
+		end
+
+		else
+		begin
+			bin[contador] = 0;
+			double = double*2.0;
+		end
+		contador = contador - 1;
+	end
+
+	$display("Binario = 0.%b", bin);
+
+end
+
+endmodule
+
+
+b.)
+
+
+	0.875(10) = 0.111(2)
+
+
+module double2bin;
+
+real double = 0.875; 
+integer contador = 7;
+reg[7:0] bin = 0;
+
+
+
+initial
+begin : main
+
+	while(double > 0 && bin >= 0)
+	begin
+		if(double*2.0 >= 1.0)
+		begin
+			bin[contador] = 1.0;
+			double = double*2.0 - 1.0;
+		end
+
+		else
+		begin
+			bin[contador] = 0;
+			double = double*2.0;
+		end
+		contador = contador - 1;
+	end
+
+	$display("Binario = 0.%b", bin);
+
+end
+
+endmodule
+
+
+c.)
+
+	1.75(10) = 1.11(2)
+
+
+module double2bin;
+
+real double = 0.75; 
+integer contador = 7;
+reg[7:0] bin = 0;
+
+
+
+initial
+begin : main
+
+	while(double > 0 && bin >= 0)
+	begin
+		if(double*2.0 >= 1.0)
+		begin
+			bin[contador] = 1.0;
+			double = double*2.0 - 1.0;
+		end
+
+		else
+		begin
+			bin[contador] = 0;
+			double = double*2.0;
+		end
+		contador = contador - 1;
+	end
+
+	$display("Binario = 1.%b", bin);
+
+end
+
+endmodule
+
+
+d)
+
+	3.125(10) = 11.001(2)
+
+module double2bin;
+
+real double = 0.125; 
+integer contador = 7;
+reg[1:0] inteiro = 3;
+reg[7:0] bin = 0;
+
+
+
+initial
+begin : main
+
+	while(double > 0 && bin >= 0)
+	begin
+		if(double*2.0 >= 1.0)
+		begin
+			bin[contador] = 1.0;
+			double = double*2.0 - 1.0;
+		end
+
+		else
+		begin
+			bin[contador] = 0;
+			double = double*2.0;
+		end
+		contador = contador - 1;
+	end
+
+	$display("Binario = %b.%b",inteiro, bin);
+
+end
+
+endmodule
+
+
+e)
+
+	11.03125(10) = 1011.00001(2)
+
+module double2bin;
+
+real double = 0.03125; 
+integer contador = 7;
+reg[3:0] inteiro = 11;
+reg[7:0] bin = 0;
+
+
+
+initial
+begin : main
+
+	while(double > 0 && bin >= 0)
+	begin
+		if(double*2.0 >= 1.0)
+		begin
+			bin[contador] = 1.0;
+			double = double*2.0 - 1.0;
+		end
+
+		else
+		begin
+			bin[contador] = 0;
+			double = double*2.0;
+		end
+		contador = contador - 1;
+	end
+
+	$display("Binario = %b.%b",inteiro, bin);
+
+end
+
+endmodule
+
+3)
+
+a.)
+	0.10111(2) = 0.232(4)
+
+
+module dbin2base;
+
+reg[5:0] variavel = 'b101110;
+
+initial
+begin : main
+
+	$display("Resultado: 0.%d%d%d", variavel[5:4], variavel[3:2], variavel[1:0]);
+
+
+end
+endmodule
+
+
+
+b.)
+	0.110101(2) = 0.65(8) 
+
+
+module dbin2base;
+
+reg[5:0] variavel = 'b101110;
+
+initial
+begin : main
+
+	$display("Resultado: 0.%d%d%d", variavel[5:4], variavel[3:2], variavel[1:0]);
+
+
+end
+endmodule
+
+
+
+c.)
+	0.10111(2) =   (16)
+
+
+module dbin2base;
+
+reg[5:0] variavel = 'b101110;
+
+initial
+begin : main
+
+	$display("Resultado: 0.%d%d%d", variavel[5:4], variavel[3:2], variavel[1:0]);
+
+
+end
+endmodule
+
+
+d.)
+	1.11011(2) = (8)
+
+
+module dbin2base;
+
+reg[5:0] variavel = 'b101110;
+
+initial
+begin : main
+
+	$display("Resultado: 0.%d%d%d", variavel[5:4], variavel[3:2], variavel[1:0]);
+
+
+end
+endmodule
+
+
+e.)
+	1001.101(2) =  (16)
+
+
+module dbin2base;
+
+reg[5:0] variavel = 'b101110;
+
+initial
+begin : main
+
+	$display("Resultado: 0.%d%d%d", variavel[5:4], variavel[3:2], variavel[1:0]);
+
+
+end
+endmodule
+
+
+

@@ -19,7 +19,7 @@ public class Aquecimento {
 
     }
 
-    public static int Maiusculas(String frase, int maiusculas, int pos) {
+    public static int Maiusculas(String frase, int maiusculas, int pos) {  //Funcao recursiva para contar numero de maiusculas em uma frase
 
         if (pos < frase.length()) {
 
@@ -36,7 +36,7 @@ public class Aquecimento {
 
     }
 
-    public static boolean StrComp (String a, String b) {
+    public static boolean StrComp (String a, String b) {  //Funcao para verificar a hora de parar o programa
         
         if (a.length() != b.length()) {
             return false;
