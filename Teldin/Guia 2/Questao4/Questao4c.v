@@ -10,7 +10,7 @@ begin : main
 	cBin[2] = c[5:4];
 	cBin[1] = c[3:2];
 	cBin[0] = c[1:0];
-	$display("c = 0.%d%d", cBin[3:2], cBin[1:0]);
+	$display("c = 0.%b%b", cBin[3:2], cBin[1:0]);
 
 end
 endmodule
