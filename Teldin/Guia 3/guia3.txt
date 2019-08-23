@@ -1,0 +1,124 @@
+Aluno: Lucas Santiago de Oliveira
+Matricula: 650888
+
+
+1.)
+
+a)
+	C1,6 (1001(2)) = 110110(2)
+
+b)
+	C1,8 (1101(2)) = 11110010(2)
+
+c)
+	C2,6 (101111(2)) = 010001(2)
+
+d)
+	C2,7 (10011(2)) = 1101101(2)
+
+e)
+	C2,8 (11011(2)) = 11100101(2)
+
+		Código em Verilog para resolver as 5 letras
+
+
+module Questao1;
+
+reg[5:0] a = 'b1001;
+reg[7:0] b = 'b1101;
+reg[5:0] c = 'b101111;
+reg[6:0] d = 'b10011;
+reg[7:0] e = 'b11011;
+
+reg[5:0] c2 = 0;
+reg[6:0] d2 = 0; 
+reg[7:0] e2 = 0;
+
+initial
+begin : main
+
+	$display("Bits normais letra A = %b, complemento de 1 da letra A = %b", a, ~a);
+	$display("Bits normais letra B = %b, complemento de 1 da letra B = %b", b, ~b);
+	c2 = ~c + 1;
+	$display("Bits normais letra C = %b, complemento de 1 da letra C = %b", c, c2);
+	d2 = ~d + 1;
+	$display("Bits normais letra D = %b, complemento de 1 da letra D = %b", d, d2);
+	e2 = ~e + 1;
+	$display("Bits normais letra E = %b, complemento de 1 da letra E = %b", e, e2);
+
+end
+endmodule
+
+
+
+2)
+
+a)
+	C1,6 (321(4)) = 000110(2)
+
+b)
+	C1,8 (5B(16)) = 10100100(2)
+
+c)
+	C2,6 (23(4)) = 110101(2)
+
+d)
+	C2,7 (175(8)) = 0000011(2)
+
+e)
+	C2,8 (B2(16)) = 01001110(2)
+
+
+
+		Versão em Verilog
+
+module Questao2;
+
+reg[2:0][2:0] a; //Valor na base 4
+reg[5:0] a2 = 0; //Valor na base 2
+
+reg[7:0] b = 'h5B;
+
+reg[2:0][2:0] c; //Valor na base 4
+reg[5:0] c2 = 0; //Valor na base 2
+reg[5:0] c3 = 0; //Valor invertido na base 2
+
+reg[6:0] d = 'o175;
+reg[6:0] d2 = 0;
+
+reg[7:0] e = 'hB2;
+reg[7:0] e2 = 0;
+
+initial
+begin : main
+
+	a[0] = 3;
+	a[1] = 2;
+	a[2] = 1;
+
+	a2[1:0] = a[2];
+	a2[3:2] = a[1];
+	a2[5:4] = a[0];
+
+	c[1] = 2;
+	c[0] = 3;
+
+	c2[1:0] = c[0];
+       	c2[3:2] = c[1];
+
+	c3 = ~c2+1;
+
+	d2 = ~d+1;
+
+	e2 = ~e+1;
+
+	$display("O complemento do numero %b é %b.", a2, ~a2);
+	$display("O complemento do numero %b é %b.", b, ~b);
+	$display("O complemento do numero %b é %b.", c2, c3);
+	$display("O complemento do numero %b é %b.", d, d2);
+	$display("O complemento do numero %b é %b.", e, e2);
+
+end
+endmodule
+
+
