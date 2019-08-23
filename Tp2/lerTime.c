@@ -48,11 +48,12 @@ void fullName(char entrada[], char texto[]){
 	int pos = 0;
 
 	for (int i = 0; i < strlen(entrada); i++ ){
-		printf("%c", entrada[i]);
-		if(Find(entrada, "Full name")){
-			printf("\n\n%d", i);
-			pos = i;
-			i = strlen(entrada);
+		if(Find(entrada, "Full")){
+			for(int j = i; j < 10; j++){
+				texto[pos] = entrada[i];
+				pos++;
+				i = strlen(entrada);
+			}
 		}
 	}
 
@@ -74,21 +75,23 @@ void ORQUESTRADOR(char html[]){
 	//Recebendo o texto do arquivo
 
 	char texto[TAM];
-	bool ehTable = false;
+	char nomeTime[100];
 
 
-	while(!feof(arqAtual) && !ehTable){
+	while(!feof(arqAtual)){
 
 		fread(texto, TAM, sizeof(char), arqAtual);
-		if(Find(texto, "<table class=\"infobox vcard\"")){
-			ehTable = true;
-		}
+		fullName(texto, nomeTime);
+		
 	}
 
+
+	printf("%s", nomeTime);
+
+	
 	//Funcoes principais
 
-	char nomeTime[100];
-	fullName(texto, nomeTime);
+
 	
 
 }
@@ -103,7 +106,6 @@ void consertarFgets(char html[]){
 
 int main(){  //Funcao main
 	char entrada[TAM];
-	
 	fgets(entrada, TAM, stdin);
 
 	while(!ehFim(entrada)){
