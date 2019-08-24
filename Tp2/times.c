@@ -11,7 +11,7 @@
 
 //Constantes globais
 const long int TAM = 1000000;
-
+const int TAMmenor = 100;
 
 //Funcao para verificar se eh o fim
 bool ehFim(char entrada[]){
@@ -31,17 +31,25 @@ bool find(char texto[], char procura[], int *resp){
   long int tam = strlen(texto);
   int tamProcura = strlen(procura);
   int posProcura = -1;
+  bool table = true;
 
   for(long int i = 0; i < tam; i++){
-    if(texto[i] == procura[0]){
+    if(texto[i] == procura[0] && table){
       encontrar = true;
+      table = false;
       for(int j = 0; j < tamProcura; j++){
         if(texto[i+j] != procura[j]){
           encontrar = false;
           j = tamProcura;
         }
+        else{
+          table = true;
+        }
       }
-      if(encontrar) posProcura = i;
+    }
+    if(encontrar){
+      posProcura = i + tamProcura;
+      i = tam;
     }
   }
   *resp = posProcura;
@@ -62,8 +70,54 @@ void limpandoEntrada(char entrada[], char textoLimpo[]){
     textoLimpo[pos] = entrada[i];
     pos++;
   }
-
 }
+
+
+//Funcao para procurar os itens dos times
+void procurarItens(char entrada[], char procurarInicio[], char procurarFinal[], char resp[]){
+  int posI;
+  int posF;
+  find(entrada, procurarInicio, &posI);
+  find(&entrada[posI], procurarFinal, &posF);
+  int j = 0;
+
+  for(int i = posI; i < posI+posF-strlen(procurarFinal); i++){
+    resp[j] = entrada[i];
+    j++;
+  }
+  resp[j] = '\0';
+}
+
+
+//Removedor de tags HTML
+void removerTags(char entrada[]){
+  bool chaves = false;
+
+  for(int i = 0; i < strlen(entrada); i++){
+    if(entrada[i] == '<'){
+      chaves = true;
+    }
+    if(chaves){
+      entrada[i] = ' ';
+    }
+    if(entrada[i] == '>'){
+      entrada[i] = ' ';
+      
+    }
+  }
+}
+
+
+//Funcao para printar as respostas na tela
+void printar(char texto[]){
+
+  for(int i = 0; i < strlen(texto); i++){
+    printf("%c", texto[i]);
+  }
+
+  printf("\n");
+}
+
 
 
 //Funcao para organizar todo o codigo
@@ -83,9 +137,15 @@ void ORQUESTRADOR(char entrada[]){
   //Removendo itens inuteis do texto
   limpandoEntrada(texto, textoLimpo);
 
-  for(int i = 0; i < strlen(textoLimpo); i++){
-    printf("%c", textoLimpo[i]);
-  }
+
+  //Procurar itens
+  char nomeTime[TAMmenor];
+  char apelidoTime[TAMmenor];
+  procurarItens(textoLimpo, "Full name</th><td>", "</td>", nomeTime);
+  procurarItens(textoLimpo, "class=\"nickname\"><i>", "</td>", apelidoTime);
+
+  printar(nomeTime);
+  printar(apelidoTime);
 
 }
 
