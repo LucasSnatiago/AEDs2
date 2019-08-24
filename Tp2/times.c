@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
 
 //Criando o tipo boolean
 #define bool short
@@ -102,7 +101,7 @@ void removerTags(char entrada[]){
     }
     if(entrada[i] == '>'){
       entrada[i] = ' ';
-      
+      chaves = false;
     }
   }
 }
@@ -114,8 +113,8 @@ void printar(char texto[]){
   for(int i = 0; i < strlen(texto); i++){
     printf("%c", texto[i]);
   }
-
   printf("\n");
+  
 }
 
 
@@ -139,11 +138,17 @@ void ORQUESTRADOR(char entrada[]){
 
 
   //Procurar itens
+  //Variaveis para armazenar as caracteristicas do time
   char nomeTime[TAMmenor];
   char apelidoTime[TAMmenor];
+
+
+  //Funcoes para procurar as caracteristicas dos times
   procurarItens(textoLimpo, "Full name</th><td>", "</td>", nomeTime);
   procurarItens(textoLimpo, "class=\"nickname\"><i>", "</td>", apelidoTime);
 
+
+  //Funcao para printar na tela os resultados
   printar(nomeTime);
   printar(apelidoTime);
 
