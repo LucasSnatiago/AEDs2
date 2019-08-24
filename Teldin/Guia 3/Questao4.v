@@ -11,5 +11,5 @@ reg signed[3:0] b2Fracionado = 'b0100;  //Parte fracionada do segundo operando d
 reg signed[3:0] respB; //Resposta da questao b
 reg signed[3:0] respBfracionada; //Resposta da parte fracionada de b
 
-reg signed
+reg signed[3*3:0] c; //
 

@@ -13,12 +13,12 @@
 //Constantes globais
 const int TAM = 100000;
 
-
+/*
 bool Find (char frase[], char texto[]){  //Funcao para procurar uma String dentro de um texto
 	bool encontrou = true;
 	int tam = strlen(frase);
 
-	if (strlen(frase) < tam) {
+	if (strlen(texto) < tam) {
 		encontrou = false;
 	}
 
@@ -30,8 +30,29 @@ bool Find (char frase[], char texto[]){  //Funcao para procurar uma String dentr
 
 	return encontrou;
 }
+*/
 
+bool isSubstring(char string[], char substring[])
+{
+				bool isContido = false;
 
+        for(int i = 0; i < strlen(string); i++)
+                if(string[i] == substring[0])
+                {
+                        isContido = true;
+                        for(int j = 0; j < strlen(substring); j++)
+                                if(string[i+j] != substring[j])
+                                {
+
+                                        j = strlen(substring);
+                                        isContido = false;
+                                }
+
+                        if(isContido == true)
+                                i = strlen(string);
+                }
+        return isContido;
+}
 
 bool ehFim(char entrada[]){  //Funcao para ver se esta no fim do arquivo
 	bool ehfim = true;
@@ -40,7 +61,7 @@ bool ehFim(char entrada[]){  //Funcao para ver se esta no fim do arquivo
 		ehfim = false;
 	}
 
-	return ehfim; 
+	return ehfim;
 }
 
 
@@ -48,7 +69,8 @@ void fullName(char entrada[], char texto[]){
 	int pos = 0;
 
 	for (int i = 0; i < strlen(entrada); i++ ){
-		if(Find(entrada, "Full")){
+		if(isSubstring(entrada, "Full name")){
+			printf("\nAchei!");
 			for(int j = i; j < 10; j++){
 				texto[pos] = entrada[i];
 				pos++;
@@ -58,7 +80,7 @@ void fullName(char entrada[], char texto[]){
 	}
 
 	//for()
-	
+
 }
 
 
@@ -66,9 +88,9 @@ void fullName(char entrada[], char texto[]){
 //Funcao que organiza todas as execucoes do codigo
 //para a main ficar mais limpa
 void ORQUESTRADOR(char html[]){
-	
+
 	//Abrindo o arquivo
-	
+
 	FILE *arqAtual;
 	arqAtual = fopen(html, "r");
 
@@ -82,17 +104,17 @@ void ORQUESTRADOR(char html[]){
 
 		fread(texto, TAM, sizeof(char), arqAtual);
 		fullName(texto, nomeTime);
-		
+
 	}
 
 
 	printf("%s", nomeTime);
 
-	
+
 	//Funcoes principais
 
 
-	
+
 
 }
 
