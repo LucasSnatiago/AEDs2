@@ -64,7 +64,7 @@ void limpandoEntrada(char entrada[], char textoLimpo[]){
   int pos = 0;
 
   find(entrada, "<table", &posProcura);
-  find(entrada, "</table>", &posFIM);
+  find(&entrada[posProcura], "</table>", &posFIM);
   for(int i = posProcura; i < posFIM; i++){
     textoLimpo[pos] = entrada[i];
     pos++;
@@ -91,17 +91,22 @@ void procurarItens(char entrada[], char procurarInicio[], char procurarFinal[], 
 //Removedor de tags HTML
 void removerTags(char entrada[]){
   bool chaves = false;
+  int pos = 0;
+  bool espaco = false;
 
   for(int i = 0; i < strlen(entrada); i++){
     if(entrada[i] == '<'){
       chaves = true;
     }
-    if(chaves){
-      entrada[i] = ' ';
-    }
     if(entrada[i] == '>'){
       entrada[i] = ' ';
       chaves = false;
+    }
+    if(chaves){
+      entrada[i] = ' ';
+    }
+    if(entrada[i] == '_'){
+      entrada[i] = ' ';
     }
   }
 }
@@ -114,7 +119,7 @@ void printar(char texto[]){
     printf("%c", texto[i]);
   }
   printf("\n");
-  
+
 }
 
 
@@ -141,16 +146,39 @@ void ORQUESTRADOR(char entrada[]){
   //Variaveis para armazenar as caracteristicas do time
   char nomeTime[TAMmenor];
   char apelidoTime[TAMmenor];
+  char nomeEstadio[TAMmenor];
+  char tecnico[TAMmenor];
+  char liga[TAMmenor];
+  char capacidade[TAMmenor];
+  char data[TAMmenor];
+  char dia[2];
+  char mes[2];
+  char ano[4];
 
 
   //Funcoes para procurar as caracteristicas dos times
-  procurarItens(textoLimpo, "Full name</th><td>", "</td>", nomeTime);
-  procurarItens(textoLimpo, "class=\"nickname\"><i>", "</td>", apelidoTime);
+  procurarItens(textoLimpo, "Full name</th><td>", "<", nomeTime);
+  procurarItens(textoLimpo, "class=\"nickname\"><i>", "<", apelidoTime);
+  procurarItens(textoLimpo, "Ground</th><td class=\"label\"><a href=\"/wiki/", "\"", nomeEstadio);
+  procurarItens(textoLimpo, "Head coach</th><td class=\"agent\"><a href=\"/wiki/", "\"", tecnico);
+  procurarItens(textoLimpo, "League</th><td><a href=\"/wiki/", "\"", liga);
+  procurarItens(textoLimpo, "Capacity</th><td>", "<", capacidade);
+  procurarItens(textoLimpo, "bday dtstart published updated\">", "<", data);
 
 
   //Funcao para printar na tela os resultados
   printar(nomeTime);
+  removerTags(apelidoTime);
   printar(apelidoTime);
+  printar(nomeEstadio);
+  removerTags(tecnico);
+  printar(tecnico);
+  removerTags(liga);
+  printar(liga);
+  printar(capacidade);
+
+
+  data(data);
 
 }
 

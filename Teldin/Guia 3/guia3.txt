@@ -185,4 +185,149 @@ endmodule
 4)
 
 a)
-	
+	10111(2) - 1101(2) = 11010(2)
+
+b)
+	101,0111(2) - 10,01(2) = 011,0011
+
+c)
+	231(4) - 113(4) = 112(4)
+
+d)
+	321(8) - 123(8) = 376(8)
+
+e)
+	7E6(16) - A1B(16) = 5CB(16)
+
+		Versão em Verilog
+
+
+
+module Questao4;
+
+reg signed[4:0] a = 'b10111; //Valor na base 2
+reg signed[3:0] a2 = 'b1101; //Valor na base 2 para ser subtraido
+reg signed[4:0] respA; //Resposta da A
+
+reg signed[2:0] b = 'b101; //Parte inteira da letra b
+reg signed[3:0] bFracionado = 'b0111; //Parte fracionada para b
+reg signed[2:0] b2 = 'b010; //Parte inteira do segundo operando de b
+reg signed[3:0] b2Fracionado = 'b0100;  //Parte fracionada do segundo operando de b
+reg signed[2:0] respB; //Resposta da questao b
+reg signed[3:0] respBfracionada; //Resposta da parte fracionada de b
+
+reg signed[5:0] c; //Primeiro operando
+reg signed[5:0] c2; //Segundo operando
+reg signed[5:0] cResp; //Resposta da operacao
+
+reg signed[7:0] d = 'o321; //Primeiro operando
+reg signed[6:0] d2 = 'o123; //Segundo operando
+reg signed[7:0] dResp; //Resposta da operacao
+
+reg signed[10:0] e = 'h7e6; //Primeiro operando
+reg signed[11:0] e2 = 'ha1b; //Segundo operando
+reg signed[11:0] eResp; //Resposta da operacao
+
+initial
+begin : main
+
+	respA = (a - a2);
+
+	respB = (b - b2);
+	respBfracionada = (bFracionado - b2Fracionado);
+
+	c[1:0] = 1;
+	c[3:2] = 3;
+	c[5:4] = 2;
+	c2[1:0] = 3;
+	c2[3:2] = 1;
+	c2[5:4] = 1;
+	cResp = (c - c2);
+
+	dResp = (d - d2);
+
+	eResp = (e - e2);
+
+	$display("a) %b", respA);
+        $display("b) %b,%b", respB, respBfracionada);
+	$display("c) %d%d%d", cResp[5:4], cResp[3:2], cResp[1:0]);
+	$display("d) %o", dResp);
+	$display("e) %h", eResp);
+		
+
+end
+endmodule
+
+
+5)
+
+a)
+	101010(2) - 1011(2) = 11111(2)
+
+b)
+	101,1101(2) - 2,5(8) = 11,1001(2)
+
+c)
+	312(4) - B(16) = 101011(2)
+
+d)
+	AB(16) - 1001111(2) = 1011100(2)
+
+e)
+	36(10) - 2C(16) = 111(2) 
+
+
+
+module Questao5;
+
+reg[7:0] a = 'b101010; //Primeiro operando
+reg[7:0] a2 = 'b1011; //Segundo operando
+reg[7:0] respA; //Resposta da A
+
+reg[7:0] b = 'b101; //Parte inteira do primeiro operando
+reg[7:0] bFrac = 'b11010000; //Parte fracionada do primeiro operando
+reg[7:0] b2 = 'o2; //Parte inteira do segundo operando
+reg[7:0] b2Frac = 'o500; //Parte fracionada do segundo operando
+reg[7:0] respB; //Resposta da parte inteira
+reg[7:0] respBFrac; //Resposta da parte fracionada
+
+reg[7:0] c; //Parte inteira do primeiro operando
+reg[7:0] c2 = 'hb; //Segundo operando
+reg[7:0] respC; //Resposta
+
+reg[7:0] d = 'hab; //Primeiro operando
+reg[7:0] d2 = 'b1001111; //Segundo operando
+reg[7:0] respD; //Resposta
+
+reg[7:0] e = 36; //Primeiro operando
+reg[7:0] e2 = 'h2c; //Segundo operando
+reg[7:0] respE; //Resposta
+
+
+initial
+begin : main
+
+	respA = 1 + (a + ~a2); //Subtracao usando soma de um termo com o complemtento de 2 do outro
+
+	respB = 1 + (b + ~b2);
+	respBFrac = 1 + (bFrac + ~b2Frac);
+
+	c[1:0] = 2;
+	c[3:2] = 1;
+	c[5:4] = 3;
+	c[7:6] = 0;
+	respC = 1 + (c + ~c2);
+
+	respD = 1 + (d + ~d2);
+
+	respE = 1 + (e + ~e2);
+
+	$display("a) %b", respA);
+	$display("b) %b,%b", respB, respBFrac);
+	$display("c) %b", respC);
+	$display("d) %b", respD);
+	$display("e) %b", ~respE);
+
+
+end
+endmodule	

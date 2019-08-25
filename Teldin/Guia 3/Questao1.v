@@ -1,3 +1,6 @@
+//Aluno: Lucas Santiago de Oliveira
+//Matricula: 650888
+
 module Questao1;
 
 reg[5:0] a = 'b1001;
