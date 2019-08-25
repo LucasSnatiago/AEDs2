@@ -123,6 +123,53 @@ void printar(char texto[]){
 }
 
 
+void limparData(char data[]){
+  for(int i = 0; i < 20; i++){
+    if(data[i] == '-'){
+      data[i] = ' ';
+    }
+  }
+}
+
+
+/*
+//Funcao para consertar a data
+void consertarData(char data[], char dia[], char mes[], char ano[]){
+  int divData = 0;
+
+  for(int i = 0; i < 20; i++){
+    if(!data[i] > '0' && data[i] < '9'){
+      divData = i;
+    }
+  }
+
+  if(divData == 4){
+    ano[0] = data[0];
+    ano[1] = data[1];
+    ano[2] = data[2];
+    ano[3] = data[3];
+
+    mes[0] = data[5];
+    mes[1] = data[6];
+
+    dia[0] = data[8];
+    dia[1] = data[9];
+  }
+
+  if(divData == 2){
+    dia[0] = data[0];
+    dia[1] = data[1];
+
+    mes[0] = data[3];
+    mes[1] = data[4];
+
+    ano[0] = data[6];
+    ano[1] = data[7];
+    ano[2] = data[8];
+    ano[3] = data[9];
+  }
+}
+*/
 
 //Funcao para organizar todo o codigo
 //Ordenando as execucoes
@@ -160,7 +207,7 @@ void ORQUESTRADOR(char entrada[]){
   procurarItens(textoLimpo, "Full name</th><td>", "<", nomeTime);
   procurarItens(textoLimpo, "class=\"nickname\"><i>", "<", apelidoTime);
   procurarItens(textoLimpo, "Ground</th><td class=\"label\"><a href=\"/wiki/", "\"", nomeEstadio);
-  procurarItens(textoLimpo, "Head coach</th><td class=\"agent\"><a href=\"/wiki/", "\"", tecnico);
+  procurarItens(textoLimpo, "<td class=\"agent\"><a href=\"/wiki/", "\"", tecnico);
   procurarItens(textoLimpo, "League</th><td><a href=\"/wiki/", "\"", liga);
   procurarItens(textoLimpo, "Capacity</th><td>", "<", capacidade);
   procurarItens(textoLimpo, "bday dtstart published updated\">", "<", data);
@@ -170,15 +217,15 @@ void ORQUESTRADOR(char entrada[]){
   printar(nomeTime);
   removerTags(apelidoTime);
   printar(apelidoTime);
+  removerTags(nomeEstadio);
   printar(nomeEstadio);
   removerTags(tecnico);
   printar(tecnico);
   removerTags(liga);
   printar(liga);
   printar(capacidade);
-
-
-  data(data);
+  limparData(data);
+  printar(data);
 
 }
 
