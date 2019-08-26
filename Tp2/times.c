@@ -132,44 +132,24 @@ void limparData(char data[]){
 }
 
 
-/*
-//Funcao para consertar a data
-void consertarData(char data[], char dia[], char mes[], char ano[]){
-  int divData = 0;
-
-  for(int i = 0; i < 20; i++){
-    if(!data[i] > '0' && data[i] < '9'){
-      divData = i;
+void printarData(char data[]){
+  if(strlen(data) == 4){
+    for(int i = 0; i < 4; i++){
+      printf("%c", data[i]);
     }
+    printf(" 01 01\n");
   }
-
-  if(divData == 4){
-    ano[0] = data[0];
-    ano[1] = data[1];
-    ano[2] = data[2];
-    ano[3] = data[3];
-
-    mes[0] = data[5];
-    mes[1] = data[6];
-
-    dia[0] = data[8];
-    dia[1] = data[9];
-  }
-
-  if(divData == 2){
-    dia[0] = data[0];
-    dia[1] = data[1];
-
-    mes[0] = data[3];
-    mes[1] = data[4];
-
-    ano[0] = data[6];
-    ano[1] = data[7];
-    ano[2] = data[8];
-    ano[3] = data[9];
+  else{
+    printar(data);
   }
 }
+
+/*
+
+  FUNCOES PRINCIPAIS DO PROGRAMA
+
 */
+
 
 //Funcao para organizar todo o codigo
 //Ordenando as execucoes
@@ -178,15 +158,21 @@ void ORQUESTRADOR(char entrada[]){
   //Abrindo arquivo{
   FILE *arq;
   arq = fopen(entrada, "r");
-  char texto[TAM];
+  //char *texto;
+  //texto = (char*)malloc(TAM * sizeof(char)); //Menos Eficiente!
+  char texto[TAM];  //Mais eficiente
+  
+  //char texto[TAM];
   char textoLimpo[TAM];
 
   //Lendo o arquivo
   fread(texto, TAM, sizeof(char), arq);
 
+  long long int BytesArq = sizeof(char) * strlen(texto);
 
   //Removendo itens inuteis do texto
   limpandoEntrada(texto, textoLimpo);
+  //free(texto);
 
 
   //Procurar itens
@@ -225,7 +211,8 @@ void ORQUESTRADOR(char entrada[]){
   printar(liga);
   printar(capacidade);
   limparData(data);
-  printar(data);
+  printarData(data);
+  printf("%lli\n", BytesArq);
 
 }
 
@@ -244,6 +231,11 @@ int main(){
   while(!ehFim(entrada)){
     consertarFgets(entrada);
     ORQUESTRADOR(entrada);
+
+
+    printf("\n");
+
+
     fgets(entrada, TAM, stdin);
   }
 
