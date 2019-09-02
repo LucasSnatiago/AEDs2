@@ -1,0 +1,8 @@
+Exemplo: Lucas Santiago de Oliveira - 650888
+Expressoes Booleanas
+ x  y = a  b  b2  c  c2  d  d2  e  e2
+ x  x   x  x  x   x  x   x   x  x  x
+ 0  0   0  1  0   1  1   1   1  1  1
+ 0  1   0  0  0   1  1   1   1  0  1
+ 1  1   0  1  1   0  0   1   1  0  0
+ 1  0   0  1  1   1  1   1   1  0  1

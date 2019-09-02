@@ -153,22 +153,20 @@ void printarData(char data[]){
 
 //Funcao para organizar todo o codigo
 //Ordenando as execucoes
-void ORQUESTRADOR(char entrada[]){
+void ORQUESTRADOR(char entrada[], long int BytesArq){
 
   //Abrindo arquivo{
   FILE *arq;
-  arq = fopen(entrada, "r");
+  arq = fopen(entrada, "rb");
   //char *texto;
   //texto = (char*)malloc(TAM * sizeof(char)); //Menos Eficiente!
   char texto[TAM];  //Mais eficiente
-  
+
   //char texto[TAM];
   char textoLimpo[TAM];
 
   //Lendo o arquivo
   fread(texto, TAM, sizeof(char), arq);
-
-  long long int BytesArq = sizeof(char) * strlen(texto);
 
   //Removendo itens inuteis do texto
   limpandoEntrada(texto, textoLimpo);
@@ -212,10 +210,20 @@ void ORQUESTRADOR(char entrada[]){
   printar(capacidade);
   limparData(data);
   printarData(data);
-  printf("%lli\n", BytesArq);
+  printf("%li\n", BytesArq);
 
 }
 
+long int quantosBytes(char entrada[]){
+  long int BytesArq = 0;
+  FILE *arq = fopen(entrada, "rb");
+  char texto[TAM];
+  fread(texto, TAM, sizeof(char), arq);
+  BytesArq = strlen(texto);
+  fclose(arq);
+  printf("OLHAQGRAnde: %li", BytesArq);
+  return BytesArq;
+}
 
 //O fgets adiciona um '\0' no final do input
 void consertarFgets(char entrada[]){
@@ -227,15 +235,13 @@ void consertarFgets(char entrada[]){
 int main(){
   char entrada[TAM];
   fgets(entrada, TAM, stdin);
+  int BytesArq = 0;
 
   while(!ehFim(entrada)){
     consertarFgets(entrada);
-    ORQUESTRADOR(entrada);
-
-
+    BytesArq = quantosBytes(entrada);
+    ORQUESTRADOR(entrada, BytesArq);
     printf("\n");
-
-
     fgets(entrada, TAM, stdin);
   }
 

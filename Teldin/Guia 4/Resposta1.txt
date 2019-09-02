@@ -1,0 +1,12 @@
+Exemplo - Lucas Santiago de Oliveira - 650888
+Expressoes booleanas
+ x  y  z =  a  b  c  d  e
+ x  x  x =  x  x  x  x  x
+ 0  0  0 =  0  0  0  1  1
+ 0  0  1 =  0  0  0  1  0
+ 0  1  0 =  1  0  0  1  1
+ 0  1  1 =  0  0  0  1  0
+ 1  0  1 =  0  0  0  1  0
+ 1  1  1 =  0  0  0  0  1
+ 1  0  0 =  0  1  0  1  0
+ 1  1  0 =  0  0  1  1  1
