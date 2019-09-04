@@ -153,14 +153,12 @@ void printarData(char data[]){
 
 //Funcao para organizar todo o codigo
 //Ordenando as execucoes
-void ORQUESTRADOR(char entrada[], long int BytesArq){
+void ORQUESTRADOR(char entrada[]){
 
   //Abrindo arquivo{
   FILE *arq;
   arq = fopen(entrada, "rb");
-  //char *texto;
-  //texto = (char*)malloc(TAM * sizeof(char)); //Menos Eficiente!
-  char texto[TAM];  //Mais eficiente
+  char texto[TAM];
 
   //char texto[TAM];
   char textoLimpo[TAM];
@@ -170,50 +168,51 @@ void ORQUESTRADOR(char entrada[], long int BytesArq){
 
   //Removendo itens inuteis do texto
   limpandoEntrada(texto, textoLimpo);
-  //free(texto);
 
 
   //Procurar itens
-  //Variaveis para armazenar as caracteristicas do time
-  char nomeTime[TAMmenor];
-  char apelidoTime[TAMmenor];
-  char nomeEstadio[TAMmenor];
-  char tecnico[TAMmenor];
-  char liga[TAMmenor];
-  char capacidade[TAMmenor];
-  char data[TAMmenor];
-  char dia[2];
-  char mes[2];
-  char ano[4];
+  //Estrutura para armazenar as caracteristicas do time
+  struct times{
+    char nomeTime[TAMmenor];
+    char apelidoTime[TAMmenor];
+    char nomeEstadio[TAMmenor];
+    char tecnico[TAMmenor];
+    char liga[TAMmenor];
+    char capacidade[TAMmenor];
+    char data[TAMmenor];
+    char dia[2];
+    char mes[2];
+    char ano[4];
+  }time;
 
 
   //Funcoes para procurar as caracteristicas dos times
-  procurarItens(textoLimpo, "Full name</th><td>", "<", nomeTime);
-  procurarItens(textoLimpo, "class=\"nickname\"><i>", "<", apelidoTime);
-  procurarItens(textoLimpo, "Ground</th><td class=\"label\"><a href=\"/wiki/", "\"", nomeEstadio);
-  procurarItens(textoLimpo, "<td class=\"agent\"><a href=\"/wiki/", "\"", tecnico);
-  procurarItens(textoLimpo, "League</th><td><a href=\"/wiki/", "\"", liga);
-  procurarItens(textoLimpo, "Capacity</th><td>", "<", capacidade);
-  procurarItens(textoLimpo, "bday dtstart published updated\">", "<", data);
+  procurarItens(textoLimpo, "Full name</th><td>", "<", time.nomeTime);
+  procurarItens(textoLimpo, "class=\"nickname\"><i>", "<", time.apelidoTime);
+  procurarItens(textoLimpo, "Ground</th><td class=\"label\"><a href=\"/wiki/", "\"", time.nomeEstadio);
+  procurarItens(textoLimpo, "<td class=\"agent\"><a href=\"/wiki/", "\"", time.tecnico);
+  procurarItens(textoLimpo, "League</th><td><a href=\"/wiki/", "\"", time.liga);
+  procurarItens(textoLimpo, "Capacity</th><td>", "<", time.capacidade);
+  procurarItens(textoLimpo, "bday dtstart published updated\">", "<", time.data);
 
 
   //Funcao para printar na tela os resultados
-  printar(nomeTime);
-  removerTags(apelidoTime);
-  printar(apelidoTime);
-  removerTags(nomeEstadio);
-  printar(nomeEstadio);
-  removerTags(tecnico);
-  printar(tecnico);
-  removerTags(liga);
-  printar(liga);
-  printar(capacidade);
-  limparData(data);
-  printarData(data);
-  printf("%li\n", BytesArq);
+  printar(time.nomeTime);
+  removerTags(time.apelidoTime);
+  printar(time.apelidoTime);
+  removerTags(time.nomeEstadio);
+  printar(time.nomeEstadio);
+  removerTags(time.tecnico);
+  printar(time.tecnico);
+  removerTags(time.liga);
+  printar(time.liga);
+  printar(time.capacidade);
+  limparData(time.data);
+  printarData(time.data);
 
 }
 
+/*
 long int quantosBytes(char entrada[]){
   long int BytesArq = 0;
   FILE *arq = fopen(entrada, "rb");
@@ -224,6 +223,8 @@ long int quantosBytes(char entrada[]){
   printf("OLHAQGRAnde: %li", BytesArq);
   return BytesArq;
 }
+*/
+
 
 //O fgets adiciona um '\0' no final do input
 void consertarFgets(char entrada[]){
@@ -235,12 +236,10 @@ void consertarFgets(char entrada[]){
 int main(){
   char entrada[TAM];
   fgets(entrada, TAM, stdin);
-  int BytesArq = 0;
 
   while(!ehFim(entrada)){
     consertarFgets(entrada);
-    BytesArq = quantosBytes(entrada);
-    ORQUESTRADOR(entrada, BytesArq);
+    ORQUESTRADOR(entrada);
     printf("\n");
     fgets(entrada, TAM, stdin);
   }
