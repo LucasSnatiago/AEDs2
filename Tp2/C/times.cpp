@@ -175,11 +175,6 @@ void ordenarData(char entrada[]){
   entrada[7] = ano[1];
   entrada[8] = ano[2];
   entrada[9] = ano[3];
-
-  //Consertar casos onde nao ha data
-  for(int i = 0; i < strlen(entrada); i++){
-    
-  }
 }
 
 
