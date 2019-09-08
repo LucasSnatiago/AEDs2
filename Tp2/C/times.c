@@ -10,7 +10,7 @@
 
 //Constantes globais
 const long int TAM = 1000000;
-const int TAMmenor = 100;
+const int TAMmenor = 1000;
 
 //Funcao para verificar se eh o fim
 bool ehFim(char entrada[]){
@@ -19,7 +19,6 @@ bool ehFim(char entrada[]){
   if(entrada[0] != 'F' || entrada[1] != 'I' || entrada[2] != 'M'){
     fim = false;
   }
-
   return fim;
 }
 
@@ -71,30 +70,12 @@ void limpandoEntrada(char entrada[], char textoLimpo[]){
   }
 }
 
-
-//Funcao para procurar os itens dos times
-void procurarItens(char entrada[], char procurarInicio[], char procurarFinal[], char resp[]){
-  int posI;
-  int posF;
-  find(entrada, procurarInicio, &posI);
-  find(&entrada[posI], procurarFinal, &posF);
-  int j = 0;
-
-  for(int i = posI; i < posI+posF-strlen(procurarFinal); i++){
-    resp[j] = entrada[i];
-    j++;
-  }
-  resp[j] = '\0';
-}
-
-
 //Removedor de tags HTML
 void removerTags(char entrada[]){
-  bool chaves = false;
+  bool chaves = true;
   int pos = 0;
-  bool espaco = false;
 
-  for(int i = 0; i < strlen(entrada); i++){
+  for(int i = 0; i < strlen(entrada) ; i++){
     if(entrada[i] == '<')
       chaves = true;
     if(!chaves){
@@ -104,6 +85,46 @@ void removerTags(char entrada[]){
     if(entrada[i] == '>')
       chaves = false;
   }
+  entrada[pos] = '\0';
+
+  bool Ecomercial = false;
+  int pos2 = 0;
+  for(int i = 0; i < strlen(entrada); i++){
+    if(entrada[i] == '&'){
+      Ecomercial = true;
+    }
+    if(!Ecomercial){
+      entrada[pos2] = entrada[i];
+      pos2++;
+    }
+    if(entrada[i] == ';'){
+      Ecomercial = false;
+    }
+  }
+  entrada[pos2] = '\0';
+}
+
+//Funcao para procurar os itens dos times
+bool procurarItens(char entrada[], char procurarInicio[], char procurarFinal[], char resp[]){
+  int posI;
+  int posF;
+  bool encontrar = false;
+  encontrar = find(entrada, procurarInicio, &posI);
+  if(encontrar){
+    find(&entrada[posI], procurarFinal, &posF);
+  }
+  int j = 0;
+
+  if(encontrar){
+    for(int i = posI; i < posI+posF-strlen(procurarFinal); i++){
+      resp[j] = entrada[i];
+      j++;
+    }
+    resp[j] = '\0';
+}
+  removerTags(resp);
+
+  return encontrar;
 }
 
 
@@ -131,26 +152,17 @@ void printar(char texto[]){
 }
 
 
-void limparData(char data[]){
-  for(int i = 0; i < 20; i++){
-    if(data[i] == '-'){
-      data[i] = ' ';
+//Funcao para pegar as datas
+void resolverDatas(char entrada[]){
+
+  bool parenteses = false;
+
+  for(int i = 0; i < strlen(entrada); i++){
+    if(entrada[i] == '('){
+      parenteses = true;
     }
   }
-}
-
-
-void printarData(char data[]){
-  if(strlen(data) == 4){
-    for(int i = 0; i < 4; i++){
-      printf("%c", data[i]);
-    }
-    printf(" 01 01\n");
-  }
-  else{
-    printar(data);
-  }
-}
+} 
 
 /*
 
@@ -188,21 +200,19 @@ void ORQUESTRADOR(char entrada[]){
     char liga[TAMmenor];
     char capacidade[TAMmenor];
     char data[TAMmenor];
-    char dia[2];
-    char mes[2];
-    char ano[4];
     long int tamanhoArquivo;
   }time;
 
 
   //Funcoes para procurar as caracteristicas dos times
-  procurarItens(textoLimpo, "Full name</th><td>", "<", time.nomeTime);
-  procurarItens(textoLimpo, "class=\"nickname\"><i>", "</td>", time.apelidoTime);
-  procurarItens(textoLimpo, "Ground</th><td class=\"label\"><a href=\"/wiki/", "\"", time.nomeEstadio);
-  procurarItens(textoLimpo, "<td class=\"agent\"><a href=\"/wiki/", "\"", time.tecnico);
-  procurarItens(textoLimpo, "League</th><td><a href=\"/wiki/", "\"", time.liga);
-  procurarItens(textoLimpo, "Capacity</th><td>", "<", time.capacidade);
-  procurarItens(textoLimpo, "bday dtstart published updated\">", "<", time.data);
+  procurarItens(textoLimpo, "Full name", "</td></tr>", time.nomeTime);
+  procurarItens(textoLimpo, "Nickname", "</td></tr>", time.apelidoTime);
+  procurarItens(textoLimpo, "Ground", "</td></tr>", time.nomeEstadio);
+  if (procurarItens(textoLimpo, "Head coach", "</td></tr>", time.tecnico)){}
+  else{ procurarItens(textoLimpo, "Manager", "</td></tr>", time.tecnico);}
+  procurarItens(textoLimpo, "League", "</td></tr>", time.liga);
+  procurarItens(textoLimpo, "Capacity", "</td></tr>", time.capacidade);
+  procurarItens(textoLimpo, "Founded", "</td></tr>", time.data);
 
   //Descobrir tamanho do Arquivo
   fseek(arq, 0, SEEK_END);
@@ -210,17 +220,12 @@ void ORQUESTRADOR(char entrada[]){
 
   //Funcao para printar na tela os resultados
   printar(time.nomeTime);
-  removerTags(time.apelidoTime);
   printar(time.apelidoTime);
-  limparData(time.data);
-  printarData(time.data);
-  removerTags(time.nomeEstadio);
+  //Printar data!
   printar(time.nomeEstadio);
   consertarCapacidade(time.capacidade);
   printar(time.capacidade);
-  removerTags(time.tecnico);
   printar(time.tecnico);
-  removerTags(time.liga);
   printar(time.liga);
   printar(entrada);
   printf(" %li ##", time.tamanhoArquivo);  
