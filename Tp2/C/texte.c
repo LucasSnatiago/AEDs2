@@ -2,9 +2,11 @@
 
 int main(){
 
+	char teste = '1';
 
-	if('1' == 49){
+	if((int)teste != 1){
 	printf("Tudo igual!");
+	printf("%i", (int)teste);
 	}
 
 }

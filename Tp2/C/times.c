@@ -55,7 +55,7 @@ bool find(char texto[], char procura[], int *resp){
 }
 
 
-//Funcao para limpar o html
+//Funcao para retirar a tag table de todo o html
 void limpandoEntrada(char entrada[], char textoLimpo[]){
   int tam = strlen(entrada);
   int posProcura = 0;
@@ -175,10 +175,32 @@ void ordenarData(char entrada[]){
   entrada[7] = ano[1];
   entrada[8] = ano[2];
   entrada[9] = ano[3];
+  entrada[10] = '\0';
 
   //Consertar casos onde nao ha data
   for(int i = 0; i < strlen(entrada); i++){
-    
+    if(i == 2 || i == 5){
+      //Nao fazer nada
+    }
+    else{
+      if(entrada[i] < '0' || entrada[i] > '9'){
+        entrada[i] = '0';
+      }
+    }
+  }
+
+  //Retirando numeros maiores que 12 no mes e maiores que 31 no dia
+  int auxDia;
+  int auxMes;
+
+  auxDia = ((int)dia[0] - 48) + ((int)dia[1] - 48);
+  auxMes = ((int)mes[0] - 48) + ((int)mes[1] - 48);
+
+  if(auxDia > 31 || auxMes > 12){
+    entrada[0] = '0';
+    entrada[1] = '0';
+    entrada[3] = '0';
+    entrada[4] = '0';
   }
 }
 
@@ -256,6 +278,7 @@ void ORQUESTRADOR(char entrada[]){
   procurarItens(textoLimpo, "Founded", "</td></tr>", time.data);
 
   //Descobrir tamanho do Arquivo
+  fseek(arq, 0, SEEK_SET);
   fseek(arq, 0, SEEK_END);
   time.tamanhoArquivo = ftell(arq);
 
@@ -273,7 +296,7 @@ void ORQUESTRADOR(char entrada[]){
   printar(time.tecnico);
   printar(time.liga);
   printar(entrada);
-  printf(" %li ##", time.tamanhoArquivo);  
+  printf(" %ld ## ", time.tamanhoArquivo);  
 
   /*
     Nome do time ## Apelido ## dia/mes/ano ## Estadio ## Capacidade ## Tecnico ## Liga ## Arquivo ## Bytes do arquivo ##\n
