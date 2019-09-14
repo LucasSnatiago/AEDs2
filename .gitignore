@@ -2,4 +2,5 @@
 *.class
 a.out
 
-
+#Ignorar todos os arquivos de sistema operacional
+*.swp
