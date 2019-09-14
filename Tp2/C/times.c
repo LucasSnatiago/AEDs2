@@ -278,8 +278,7 @@ void ORQUESTRADOR(char entrada[]){
   procurarItens(textoLimpo, "Founded", "</td></tr>", time.data);
 
   //Descobrir tamanho do Arquivo
-  fseek(arq, 0, SEEK_SET);
-  fseek(arq, 0, SEEK_END);
+  fseek(arq, ftell(arq), SEEK_END);
   time.tamanhoArquivo = ftell(arq);
 
   //Formatando prints
