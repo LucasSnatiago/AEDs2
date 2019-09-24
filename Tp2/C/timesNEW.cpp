@@ -154,16 +154,95 @@ void printar(char texto[]){
 
 //Funcao para ordenar a data
 void ordenarData(char entrada[]){
-  
+  int resp = 0;
+  char* tmp = (char*) malloc(100 * sizeof(char));
+
+  for(int i = 0; i < strlen(entrada); i++){  //toLowerCase
+    if(entrada[i] > 'A' && entrada[i] < 'Z'){
+      entrada[i] = (char) entrada[i] + 32;
+    }
+  }
+
+
+  if (procurarItens(entrada, "january", "<", tmp) == true) {
+  	resp = 1;
+	} else if (procurarItens(entrada, "february", "<", tmp) == true) {
+		resp = 2;
+	} else if (procurarItens(entrada, "march", "<", tmp) == true) {
+		resp = 3;
+	} else if (procurarItens(entrada, "april", "<", tmp) == true) {
+		resp = 4;
+	} else if (procurarItens(entrada, "may", "<", tmp) == true) {
+		resp = 5;
+	} else if (procurarItens(entrada, "june", "<", tmp) == true) {
+		resp = 6;
+	} else if (procurarItens(entrada, "july", "<", tmp) == true) {
+		resp = 7;
+	} else if (procurarItens(entrada, "august", "<", tmp) == true) {
+		resp = 8;
+	} else if (procurarItens(entrada, "september", "<", tmp) == true) {
+		resp = 9;
+	} else if (procurarItens(entrada, "october", "<", tmp) == true) {
+		resp = 10;
+	} else if (procurarItens(entrada, "november", "<", tmp) == true) {
+		resp = 11;
+	} else if (procurarItens(entrada, "december", "<", tmp) == true) {
+		resp = 12;
+	}
+
+  int pos = 0;
+  for(int i = 0; i < strlen(entrada); i++){  //Retirar o mes da contagem
+    if(entrada[i] >= 'a' && entrada[i] <= 'z'){
+      continue;
+    }
+    else{
+      entrada[pos] = entrada[i];
+      pos++;
+    }
+  }
+  entrada[pos] = '\0';
+
   char ano[4], mes[2], dia[2];
-  ano[0] = entrada[0];
-  ano[1] = entrada[1];
-  ano[2] = entrada[2];
-  ano[3] = entrada[3];
-  mes[0] = entrada[5];
-  mes[1] = entrada[6];
-  dia[0] = entrada[8];
-  dia[1] = entrada[9];
+  if(resp < 10){  //Consertar numero do mes
+    mes[0] = '0';
+    mes[1] = (char) resp + 48;
+  }
+  else{
+    resp -= 10;
+    mes[0] = '1';
+    mes[1] = (char) resp + 48;
+  }
+
+  int cont = 0;
+  for(int i = 0; i < strlen(entrada); i++){  //Procurar onde comeca o ano
+    if(entrada[i] == ' '){
+      cont = i + 1;  //Lugar onde esta o primeiro numero do ano
+    }
+  }
+
+  //Escrever dia
+  dia[0] = '0';
+  dia[1] = '0';
+  if(cont < 3){
+    dia[1] = entrada[0];
+  }
+  else{
+    dia[0] = entrada[0];
+    dia[1] = entrada[1];
+  }
+
+
+  ano[0] = entrada[cont];
+  ano[1] = entrada[cont+1];
+  ano[2] = entrada[cont+2];
+  ano[3] = entrada[cont+3];
+
+  /*--- METODO ANTIGO DE PEGAR AS DATAS
+  //mes[0] = entrada[5];
+  //mes[1] = entrada[6];
+  //dia[0] = entrada[0];
+  //dia[1] = entrada[1];
+  ------------------------------------*/
 
   entrada[0] = dia[0];
   entrada[1] = dia[1];
@@ -177,17 +256,6 @@ void ordenarData(char entrada[]){
   entrada[9] = ano[3];
   entrada[10] = '\0';
 
-  //Consertar casos onde nao ha data
-  for(int i = 0; i < strlen(entrada); i++){
-    if(i == 2 || i == 5){
-      //Nao fazer nada
-    }
-    else{
-      if(entrada[i] < '0' || entrada[i] > '9'){
-        entrada[i] = '0';
-      }
-    }
-  }
 
   //Retirando numeros maiores que 12 no mes e maiores que 31 no dia
   int auxDia;
@@ -196,36 +264,13 @@ void ordenarData(char entrada[]){
   auxDia = ((int)dia[0] - 48) + ((int)dia[1] - 48);
   auxMes = ((int)mes[0] - 48) + ((int)mes[1] - 48);
 
-  if(auxDia > 31 || auxMes > 12){
+  if(auxDia > 31 || auxMes > 12 || auxMes == 0){
     entrada[0] = '0';
     entrada[1] = '0';
     entrada[3] = '0';
     entrada[4] = '0';
   }
 }
-
-
-//Funcao para pegar as datas
-void resolverDatas(char entrada[]){
-
-  char ano[4], mes[2], dia[2];
-  int pos = 0;
-  for(int i = 0; i < strlen(entrada); i++){
-    if(entrada[i] == '('){
-      for(int j = 1; j < strlen(entrada); j++){
-        entrada[pos] = entrada[i+j];
-        pos++;
-        if(entrada[i+j] == ')'){
-        j = strlen(entrada);
-        i = strlen(entrada);
-        }
-      }      
-    }
-  }
-  entrada[pos-1] = '\0';
-
-  ordenarData(entrada);
-} 
 
 /*
 
@@ -252,6 +297,13 @@ void ORQUESTRADOR(char entrada[]){
   //Removendo itens inuteis do texto
   limpandoEntrada(texto, textoLimpo);
 
+/*
+  for(int i = 0; i < strlen(entrada); i++){  //toLowerCase
+    if(entrada[i] >= 'A' && entrada[i] <= 'Z'){
+      entrada[i] = (char) entrada[i] + 32;
+    }
+  }
+*/
 
   //Procurar itens
   //Variaveis para armazenar as caracteristicas do time
@@ -266,24 +318,24 @@ void ORQUESTRADOR(char entrada[]){
     long int tamanhoArquivo;
   }time;
 
-
   //Funcoes para procurar as caracteristicas dos times
   procurarItens(textoLimpo, "Full name", "</td></tr>", time.nomeTime);
   procurarItens(textoLimpo, "Nickname", "</td></tr>", time.apelidoTime);
   procurarItens(textoLimpo, "Ground", "</td></tr>", time.nomeEstadio);
-  if (procurarItens(textoLimpo, "Head coach", "</td></tr>", time.tecnico)){}
-  else{ procurarItens(textoLimpo, "Manager", "</td></tr>", time.tecnico);}
+  if (procurarItens(textoLimpo, "Head coach", "</td></tr>", time.tecnico)){
+  }else{ procurarItens(textoLimpo, "Manager", "</td></tr>", time.tecnico);}
   procurarItens(textoLimpo, "League", "</td></tr>", time.liga);
   procurarItens(textoLimpo, "Capacity", "</td></tr>", time.capacidade);
-  procurarItens(textoLimpo, "Founded", "</td></tr>", time.data);
+  procurarItens(textoLimpo, "Founded", "<span", time.data);
 
   //Descobrir tamanho do Arquivo
-  fseek(arq, ftell(arq), SEEK_END);
+  rewind(arq);
+  fseek(arq, SEEK_SET, SEEK_END);
   time.tamanhoArquivo = ftell(arq);
 
   //Formatando prints
   consertarCapacidade(time.capacidade);
-  resolverDatas(time.data);
+  ordenarData(time.data);
 
 
   //Funcao para printar na tela os resultados
@@ -295,7 +347,11 @@ void ORQUESTRADOR(char entrada[]){
   printar(time.tecnico);
   printar(time.liga);
   printar(entrada);
-  printf(" %ld ## ", time.tamanhoArquivo);  
+  printf(" %ld ## ", time.tamanhoArquivo);
+
+
+  //Fechando o arquivo
+  fclose(arq);
 
   /*
     Nome do time ## Apelido ## dia/mes/ano ## Estadio ## Capacidade ## Tecnico ## Liga ## Arquivo ## Bytes do arquivo ##\n
