@@ -1,3 +1,7 @@
+
+a.out: formato do arquivo elf64-x86-64
+
+
 Desmontagem da seção .init:
 
 00000000000007b8 <_init>:
