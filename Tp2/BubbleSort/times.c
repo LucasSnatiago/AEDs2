@@ -15,8 +15,8 @@ const int TAMmenor = 1000;
 
 //Strutura para armazenar os arquivos
 typedef struct TIMES{
-  char nomes[1000];
-  long int TAMarquivo;
+  char nomes[TAMmenor];
+  char tecnico[TAMmenor]
 }TIMES;
 
 typedef struct Ordem{
@@ -251,23 +251,26 @@ void ordenadorLista(char listaChar[], int listaInt[]){
 }
 */
 
-void selectionSorting(Ordem listaOrdenada[], int* movimentacoes, int* comparacoes, int pos){
-  int maior = 0;
-  for(int i = 0; i < pos; i++){
-    if (listaOrdenada[maior].times.TAMarquivo < listaOrdenada[i].times.TAMarquivo){
-      maior = i;
+void ShellSorting(Ordem listaOrdenada[], int* movimentacoes, int* comparacoes, int tam){
+  int i , j;
+  Ordem valor;
+ 
+    int h = 1;
+    while(h < tam) {
+        h = 3*h+1;
     }
-    *comparacoes += 1;
-  }
-  //Swap
-  Ordem tmp = listaOrdenada[pos];
-  listaOrdenada[pos] = listaOrdenada[maior];
-  listaOrdenada[maior] = tmp;
-  *movimentacoes += 2;
-
-	if(pos > 0){
-    selectionSorting(listaOrdenada, movimentacoes, comparacoes, pos - 1);
-  }
+    while (h > 0) {
+        for(i = h; i < tam; i++) {
+            value = listaOrdenada[i];
+            j = i;
+            while (j > h-1 && value <= vet[j - h]) {
+                vet[j] = vet [j - h];
+                j = j - h;
+            }
+            vet [j] = value;
+        }
+        h = h/3;
+    }
 }
 
 
@@ -364,7 +367,7 @@ void SORT(char entrada[], long int* tamArq, bool ordenar, Ordem lista[], int num
 
   if(ordenar){
     FILE *arq;
-    arq = fopen("matrícula_selecaoRecursiva.txt", "wb");
+    arq = fopen("matrícula_shellshort.txt", "wb");
 
     fprintf(arq, "%s", "650888\t");
 
@@ -381,7 +384,7 @@ void SORT(char entrada[], long int* tamArq, bool ordenar, Ordem lista[], int num
 
     clock_t inicio = clock();
 
-    selectionSorting(lista, &movimentacoes, &comparacoes, numArquivo-1);
+    ShellSorting(lista, &movimentacoes, &comparacoes, numArquivo - 1);
 
     clock_t final = clock();
     double total = (double) (final - inicio) / CLOCKS_PER_SEC;
@@ -423,12 +426,12 @@ int main(){
     }
     ordem[numArquivo].times.nomes[tmp] = '\0';
 
-    SORT(entrada, &ordem[numArquivo].times.TAMarquivo, false, ordem, numArquivo);
+    SORT(entrada, &ordem[numArquivo].times.tecnico, false, ordem, numArquivo);
     numArquivo++;
     fgets(entrada, TAM, stdin);
   }
 
-  SORT(entrada, &ordem[numArquivo].times.TAMarquivo, true, ordem, numArquivo);
+  SORT(entrada, &ordem[numArquivo].times.tecnico, true, ordem, numArquivo);
 
   long int tmp2;
   for(int i = 0; i < numArquivo; i++){
