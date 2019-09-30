@@ -253,7 +253,8 @@ void ordenadorLista(char listaChar[], int listaInt[]){
 
 void ShellSorting(Ordem listaOrdenada[], int* movimentacoes, int* comparacoes, int tam){
   int i , j;
-  Ordem valor;
+  int valor;
+  Ordem trocas;
  
     int h = 1;
     while(h < tam) {
@@ -261,13 +262,13 @@ void ShellSorting(Ordem listaOrdenada[], int* movimentacoes, int* comparacoes, i
     }
     while (h > 0) {
         for(i = h; i < tam; i++) {
-            value = listaOrdenada[i];
+            valor = (int) listaOrdenada[i].times.tecnico;
             j = i;
-            while (j > h-1 && value <= vet[j - h]) {
-                vet[j] = vet [j - h];
+            while (j > h-1 && valor <= (int) listaOrdenada[j - h].times.tecnico) {
+                listaOrdenada[j] = listaOrdenada[j - h];
                 j = j - h;
             }
-            vet [j] = value;
+            vet[j] = value;
         }
         h = h/3;
     }

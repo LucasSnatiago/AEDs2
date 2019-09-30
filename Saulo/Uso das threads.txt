@@ -1,0 +1,93 @@
+Região sequencial 1. Thread master.  Número de threads: 1
+Numero de processadores: 16
+Entrando na primeira região paralela...
+Oi mundo! Sou a thread 11 
+Oi mundo! Sou a thread 13 
+Oi mundo! Sou a thread 12 
+Oi mundo! Sou a thread 1 
+Oi mundo! Sou a thread 2 
+Oi mundo! Sou a thread 0 
+Oi mundo! Sou a thread 3 
+Oi mundo! Sou a thread 9 
+Oi mundo! Sou a thread 7 
+Oi mundo! Sou a thread 6 
+Oi mundo! Sou a thread 10 
+Oi mundo! Sou a thread 4 
+Oi mundo! Sou a thread 8 
+Oi mundo! Sou a thread 5 
+Oi mundo! Sou a thread 15 
+Oi mundo! Sou a thread 14 
+Fim da primeira região paralela...
+
+Região sequencial 2. Thread master. Número de threads: 1
+Numero de processadores: 16
+Entrando na segunda região paralela...
+Sou a thread 0 
+Sou a thread 8 
+Sou a thread 2 
+Sou a thread 5 
+Sou a thread 4 
+Sou a thread 14 
+Sou a thread 9 
+Sou a thread 6 
+Sou a thread 12 
+Sou a thread 10 
+i = 0 
+i = 0 
+i = 0 
+i = 0 
+i = 1 
+i = 2 
+i = 0 
+i = 1 
+i = 2 
+i = 1 
+i = 2 
+i = 0 
+Sou a thread 11 
+i = 0 
+i = 0 
+i = 0 
+i = 1 
+Sou a thread 3 
+i = 2 
+i = 0 
+Sou a thread 15 
+Sou a thread 1 
+i = 0 
+i = 1 
+i = 0 
+i = 2 
+i = 1 
+i = 2 
+i = 1 
+i = 2 
+i = 1 
+i = 2 
+i = 1 
+i = 2 
+i = 1 
+i = 2 
+i = 0 
+i = 1 
+i = 2 
+i = 1 
+i = 2 
+i = 0 
+i = 1 
+i = 2 
+i = 1 
+Sou a thread 7 
+i = 2 
+i = 0 
+i = 1 
+i = 2 
+Sou a thread 13 
+i = 0 
+i = 1 
+i = 2 
+Fim da segunda região paralela...
+
+Região sequencial 3. Thread master. Número de threads: 1
+Numero de processadores: 16
+Terminando o programa...
