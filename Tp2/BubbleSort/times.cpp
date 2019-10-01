@@ -12,11 +12,12 @@
 //Constantes globais
 const long int TAM = 1000000;
 const int TAMmenor = 1000;
+#define tamzinho 300
 
 //Strutura para armazenar os arquivos
 typedef struct TIMES{
-  char nomes[1000];
-  long int TAMarquivo;
+  char nomes[tamzinho];
+  char liga[tamzinho];
 }TIMES;
 
 typedef struct Ordem{
@@ -74,14 +75,16 @@ void limpandoEntrada(char entrada[], char textoLimpo[]){
   int posFIM = 0;
   int pos = 0;
 
-  find(entrada, "<table", &posProcura);
+  find(entrada, "vcard", &posProcura);
   find(&entrada[posProcura], "</table>", &posFIM);
-  for(int i = posProcura; i < posFIM; i++){
+  for(int i = posProcura; i < posFIM+10000; i++){
+    if(entrada[i] == '\n') {continue;}
     textoLimpo[pos] = entrada[i];
     pos++;
   }
 }
 
+/*
 //Removedor de tags HTML
 void removerTags(char entrada[]){
   bool chaves = true;
@@ -115,6 +118,51 @@ void removerTags(char entrada[]){
   }
   entrada[pos2] = '\0';
 }
+*/
+
+//Removedor de tags HTML
+char* removerTags(char entrada[]){
+  bool chaves = true;
+  char* string;
+  int pos = 0;
+
+  for (int i = 0; i < strlen(entrada); i++)
+  {
+    if (entrada[i] == '<')
+      chaves = true;
+    if (!chaves)
+    {
+      entrada[pos] = entrada[i];
+      pos++;
+    }
+    if (entrada[i] == '>')
+      chaves = false;
+  }
+  entrada[pos] = '\0';
+
+  bool Ecomercial = false;
+  int pos2 = 0;
+  for (int i = 0; i < strlen(entrada); i++)
+  {
+    if (entrada[i] == '&')
+    {
+      Ecomercial = true;
+    }
+    if (!Ecomercial)
+    {
+      entrada[pos2] = entrada[i];
+      pos2++;
+    }
+    if (entrada[i] == ';')
+    {
+      Ecomercial = false;
+    }
+  }
+  entrada[pos2] = '\0';
+
+  string = entrada;
+  return string;
+}
 
 //Funcao para procurar os itens dos times
 bool procurarItens(char entrada[], char procurarInicio[], char procurarFinal[], char resp[]){
@@ -134,7 +182,7 @@ bool procurarItens(char entrada[], char procurarInicio[], char procurarFinal[], 
     }
     resp[j] = '\0';
 }
-  removerTags(resp);
+  strcpy(resp, removerTags(resp));
 
   return encontrar;
 }
@@ -239,34 +287,25 @@ void resolverDatas(char entrada[]){
   ordenarData(entrada);
 }
 
-/*
-	FUNCAO NAO NECESSARIA AINDA!
-void ordenadorLista(char listaChar[], int listaInt[]){
-	int tam = strlen(listaChar);
-	int i;
-	for(i = 0; i < tam; i++){
-		listaInt[i] = (int) listaChar[i];
-	}
-	listaInt[i] = '\0';
-}
-*/
-
-void selectionSorting(Ordem listaOrdenada[], int* movimentacoes, int* comparacoes, int pos){
-  int maior = 0;
-  for(int i = 0; i < pos; i++){
-    if (listaOrdenada[maior].times.TAMarquivo < listaOrdenada[i].times.TAMarquivo){
-      maior = i;
-    }
-    *comparacoes += 1;
+void printarListaOrdenada(Ordem time[], int quantTimes){
+  for (int i = 0; i < quantTimes; i++){
+    printf("%s\n", time[i].times.nomes);
   }
-  //Swap
-  Ordem tmp = listaOrdenada[pos];
-  listaOrdenada[pos] = listaOrdenada[maior];
-  listaOrdenada[maior] = tmp;
-  *movimentacoes += 2;
+}
 
-	if(pos > 0){
-    selectionSorting(listaOrdenada, movimentacoes, comparacoes, pos - 1);
+
+void bolha(Ordem lista[], int* comparacoes, int* movimentacoes, int tam){
+  Ordem aux;
+  for(int i = 0; i < tam; i++){
+    for(int j = i; j < tam -1; j++){
+      comparacoes++;
+      if(strcmp(lista[j].times.liga, lista[j+1].times.liga) > 0){
+        aux = lista[j];
+        lista[j] = lista[j+1];
+        lista[j+1] = aux;
+        movimentacoes++;
+      }
+    }
   }
 }
 
@@ -279,7 +318,7 @@ void selectionSorting(Ordem listaOrdenada[], int* movimentacoes, int* comparacoe
 
 //Funcao para organizar todo o codigo
 //Ordenando as execucoes
-void ORQUESTRADOR(char entrada[], long int* ordenar, bool print){
+void ORQUESTRADOR(char entrada[], Ordem lista[], int listaAtual, bool print){
 
   //Abrindo arquivo{
   FILE *arq;
@@ -309,25 +348,40 @@ void ORQUESTRADOR(char entrada[], long int* ordenar, bool print){
     long int tamanhoArquivo;
   }time;
 
+  /*
+  //Zerar todas as variaveis
+  memset(time.nomeTime, '\0', sizeof(time.nomeTime));
+  memset(time.apelidoTime, '\0', sizeof(time.apelidoTime));
+  memset(time.nomeEstadio, '\0', sizeof(time.nomeEstadio));
+  memset(time.tecnico, '\0', sizeof(time.tecnico));
+  memset(time.liga, '\0', sizeof(time.liga));
+  memset(time.capacidade, '\0', sizeof(time.capacidade));
+  memset(time.data, '\0', sizeof(time.data));
+  */
 
+  
+  //Descobrir tamanho do Arquivo
+  fseek(arq, 0, SEEK_END);
+  time.tamanhoArquivo = ftell(arq);
+  fseek(arq, 0, SEEK_SET);
+  
   //Funcoes para procurar as caracteristicas dos times
+  //printf("%s\n\n", textoLimpo);
   procurarItens(textoLimpo, "Full name", "</td></tr>", time.nomeTime);
   procurarItens(textoLimpo, "Nickname", "</td></tr>", time.apelidoTime);
   procurarItens(textoLimpo, "Ground", "</td></tr>", time.nomeEstadio);
-  if (procurarItens(textoLimpo, "Head coach", "</td></tr>", time.tecnico)){}
-  else{ procurarItens(textoLimpo, "Manager", "</td></tr>", time.tecnico);}
+  if (procurarItens(textoLimpo, "Manager", "</td>", time.tecnico)){}
+  else if (procurarItens(textoLimpo, "Coach", "</td>", time.tecnico)) {}
+  else {procurarItens(textoLimpo, "Head coach", "</td>", time.tecnico);}
   procurarItens(textoLimpo, "League", "</td></tr>", time.liga);
   procurarItens(textoLimpo, "Capacity", "</td></tr>", time.capacidade);
   procurarItens(textoLimpo, "Founded", "</td></tr>", time.data);
-
-  //Descobrir tamanho do Arquivo
-  fseek(arq, ftell(arq), SEEK_END);
-  time.tamanhoArquivo = ftell(arq);
+  strcpy(time.tecnico, "0");	
+ 
 
   //Formatando prints
   consertarCapacidade(time.capacidade);
   resolverDatas(time.data);
-
 
   //Funcao para printar na tela os resultados
   if(print){
@@ -350,38 +404,42 @@ void ORQUESTRADOR(char entrada[], long int* ordenar, bool print){
  /*
 	Sortings
  */
-	*ordenar = time.tamanhoArquivo;
+  int i;
+  for(i = 0; i < strlen(time.tecnico); i++){
+    lista[listaAtual].times.liga[i] = time.liga[i];
+  }
+	lista[listaAtual].times.liga[i] = '\0';
 }
 
-void SORT(char entrada[], long int* tamArq, bool ordenar, Ordem lista[], int numArquivo){
+void SORT(char entrada[], bool ordenar, Ordem lista[], int listaAtual){
   //Executando os arquivos    
-  if(!ordenar) ORQUESTRADOR(entrada, tamArq, false);
-
+  if(!ordenar)
+    ORQUESTRADOR(entrada, lista, listaAtual, false);
 
   /*-----
   ORDENAR APENAS QUANDO TODOS OS ARQUIVOS FOREM LIDOS
   -------*/
 
-  if(ordenar){
+  /*if(ordenar){
     FILE *arq;
-    arq = fopen("matrícula_selecaoRecursiva.txt", "wb");
+    arq = fopen("matrícula_bolha.txt", "wb");
 
     fprintf(arq, "%s", "650888\t");
 
-    /*-----
+    -----
     SORTING
-    ------*/
+    ------
 
     int comparacoes = 0;
     int movimentacoes = 0;
 
-    /*----------
+    ----------
     CRONOMETRANDO TEMPO DE EXECUCAO DA ORDENACAO
-    ----------*/
+    ----------
 
     clock_t inicio = clock();
 
-    selectionSorting(lista, &movimentacoes, &comparacoes, numArquivo-1);
+    bolha(lista, &movimentacoes, &comparacoes, listaAtual - 1);
 
     clock_t final = clock();
     double total = (double) (final - inicio) / CLOCKS_PER_SEC;
@@ -394,7 +452,7 @@ void SORT(char entrada[], long int* tamArq, bool ordenar, Ordem lista[], int num
 
     //Tempo gasto de execucao
     fprintf(arq, "%lf\t", total);
-  }
+  }*/
 }
 
 //O fgets adiciona um '\0' no final do input
@@ -408,31 +466,26 @@ int main(){
   char entrada[TAM];
   fgets(entrada, TAM, stdin);
   //Contador de numero arquivos
-  int numArquivo = 0;
   Ordem ordem[TAMmenor];
-
+  int numArquivo = 0;
 
   while(!ehFim(entrada)){
     consertarFgets(entrada);
     //Escrever nome do arquivo na struct
 
     //Salvar o nome dos arquivos em uma struct
-    int tmp;
-    for(tmp = 0; tmp < strlen(entrada); tmp++){
-      ordem[numArquivo].times.nomes[tmp] = entrada[tmp];
-    }
-    ordem[numArquivo].times.nomes[tmp] = '\0';
+    strcpy(ordem[numArquivo].times.nomes, entrada);
 
-    SORT(entrada, &ordem[numArquivo].times.TAMarquivo, false, ordem, numArquivo);
+    SORT(entrada,  false, ordem, numArquivo);
     numArquivo++;
     fgets(entrada, TAM, stdin);
   }
 
-  SORT(entrada, &ordem[numArquivo].times.TAMarquivo, true, ordem, numArquivo);
+  SORT(entrada, true, ordem, numArquivo);
 
-  long int tmp2;
-  for(int i = 0; i < numArquivo; i++){
-    ORQUESTRADOR(ordem[i].times.nomes, &tmp2, true);
+  for (int i = 0; i < numArquivo; i++)
+  {
+    ORQUESTRADOR(ordem[i].times.nomes, ordem, i, true);
   }
 
   return 0;

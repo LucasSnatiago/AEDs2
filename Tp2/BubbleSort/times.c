@@ -12,15 +12,17 @@
 //Constantes globais
 const long int TAM = 1000000;
 const int TAMmenor = 1000;
+#define tamzinho 300
 
 //Strutura para armazenar os arquivos
 typedef struct TIMES{
-  char nomes[TAMmenor];
-  char tecnico[TAMmenor]
+  char nomes[tamzinho];
+  char tecnico[tamzinho];
 }TIMES;
 
 typedef struct Ordem{
   TIMES times;
+  int quantidadeTimes;
 }Ordem;
 
 
@@ -239,39 +241,72 @@ void resolverDatas(char entrada[]){
   ordenarData(entrada);
 }
 
-/*
-	FUNCAO NAO NECESSARIA AINDA!
-void ordenadorLista(char listaChar[], int listaInt[]){
-	int tam = strlen(listaChar);
-	int i;
-	for(i = 0; i < tam; i++){
-		listaInt[i] = (int) listaChar[i];
-	}
-	listaInt[i] = '\0';
+void printarListaOrdenada(Ordem time[]){
+  for (int i = 0; i < time[0].quantidadeTimes; i++){
+    printf("%s\n", time[i].times.nomes);
+  }
 }
-*/
+
+
+int strNomeRecursivo(char time1[], char time2[], int pos)
+{
+  int resp = -1;
+  if (time1[pos] < time2[pos])
+  {
+    resp = 1; //O time 1 vem primeiro na ordem alfabetica
+  }
+  if (time2[pos] < time1[pos])
+  {
+    resp = 0; //O time 2 vem primeiro na ordem alafabetica
+  }
+  if (strlen(time1) < strlen(time2))
+  {
+    resp = 1;
+  }
+  if (strlen(time2) < strlen(time1))
+  {
+    resp = 0;
+  }
+
+  if (strlen(time1) < pos && strlen(time2) < pos)
+  {
+    resp = strNomeRecursivo(time1, time2, pos + 1);
+  }
+
+  return resp;
+}
+
+
+int strNome(char time1[], char time2[])
+{
+  return strNomeRecursivo(time1, time2, 0);
+}
+
 
 void ShellSorting(Ordem listaOrdenada[], int* movimentacoes, int* comparacoes, int tam){
-  int i , j;
-  int valor;
-  Ordem trocas;
- 
-    int h = 1;
-    while(h < tam) {
-        h = 3*h+1;
+  int i, j;
+  Ordem value;
+
+  int h = 1;
+  while (h < tam){
+    h = 3 * h + 1;
+  }
+
+  while (h > 0){
+    for (i = h; i < tam; i++){
+      value = listaOrdenada[i];
+      j = i;
+      while (j > h - 1 && strNome(value.times.tecnico, listaOrdenada[j - h].times.tecnico) == 1){
+        listaOrdenada[j] = listaOrdenada[j - h];
+        movimentacoes++;
+        comparacoes++;
+        j = j - h;
+      }
+      listaOrdenada[j] = value;
     }
-    while (h > 0) {
-        for(i = h; i < tam; i++) {
-            valor = (int) listaOrdenada[i].times.tecnico;
-            j = i;
-            while (j > h-1 && valor <= (int) listaOrdenada[j - h].times.tecnico) {
-                listaOrdenada[j] = listaOrdenada[j - h];
-                j = j - h;
-            }
-            vet[j] = value;
-        }
-        h = h/3;
-    }
+    h = h / 3;
+  }
+  //printarListaOrdenada(listaOrdenada);
 }
 
 
@@ -283,7 +318,7 @@ void ShellSorting(Ordem listaOrdenada[], int* movimentacoes, int* comparacoes, i
 
 //Funcao para organizar todo o codigo
 //Ordenando as execucoes
-void ORQUESTRADOR(char entrada[], long int* ordenar, bool print){
+void ORQUESTRADOR(char entrada[], Ordem lista[], int listaAtual, bool print){
 
   //Abrindo arquivo{
   FILE *arq;
@@ -354,13 +389,17 @@ void ORQUESTRADOR(char entrada[], long int* ordenar, bool print){
  /*
 	Sortings
  */
-	*ordenar = time.tamanhoArquivo;
+  int i;
+  for(i = 0; i < strlen(time.tecnico); i++){
+    lista[listaAtual].times.tecnico[i] = time.tecnico[i];
+  }
+	lista[listaAtual].times.tecnico[i] = '\0';
 }
 
-void SORT(char entrada[], long int* tamArq, bool ordenar, Ordem lista[], int numArquivo){
+void SORT(char entrada[], bool ordenar, Ordem lista[], int listaAtual){
   //Executando os arquivos    
-  if(!ordenar) ORQUESTRADOR(entrada, tamArq, false);
-
+  if(!ordenar)
+    ORQUESTRADOR(entrada, lista, listaAtual, false);
 
   /*-----
   ORDENAR APENAS QUANDO TODOS OS ARQUIVOS FOREM LIDOS
@@ -385,7 +424,7 @@ void SORT(char entrada[], long int* tamArq, bool ordenar, Ordem lista[], int num
 
     clock_t inicio = clock();
 
-    ShellSorting(lista, &movimentacoes, &comparacoes, numArquivo - 1);
+    ShellSorting(lista, &movimentacoes, &comparacoes, lista[0].quantidadeTimes - 1);
 
     clock_t final = clock();
     double total = (double) (final - inicio) / CLOCKS_PER_SEC;
@@ -412,9 +451,9 @@ int main(){
   char entrada[TAM];
   fgets(entrada, TAM, stdin);
   //Contador de numero arquivos
-  int numArquivo = 0;
   Ordem ordem[TAMmenor];
-
+  ordem[0].quantidadeTimes = 0;
+  int numArquivo = 0;
 
   while(!ehFim(entrada)){
     consertarFgets(entrada);
@@ -427,16 +466,17 @@ int main(){
     }
     ordem[numArquivo].times.nomes[tmp] = '\0';
 
-    SORT(entrada, &ordem[numArquivo].times.tecnico, false, ordem, numArquivo);
+    SORT(entrada,  false, ordem, numArquivo);
     numArquivo++;
+    ordem[0].quantidadeTimes++;
     fgets(entrada, TAM, stdin);
   }
 
-  SORT(entrada, &ordem[numArquivo].times.tecnico, true, ordem, numArquivo);
+  SORT(entrada, true, ordem, numArquivo);
 
-  long int tmp2;
-  for(int i = 0; i < numArquivo; i++){
-    ORQUESTRADOR(ordem[i].times.nomes, &tmp2, true);
+  char tmp2[tamzinho];
+  for (int i = 0; i < numArquivo; i++){
+    ORQUESTRADOR(ordem[i].times.nomes, ordem, numArquivo, true);
   }
 
   return 0;
