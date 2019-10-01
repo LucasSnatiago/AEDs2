@@ -1,19 +1,34 @@
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.File;
 
-class Times{
-    public void main(String[] args){
+class Times extends Time{
+    public static void main(String[] args) throws IOException{
         Scanner leitor = new Scanner(System.in);
         String entrada = leitor.nextLine();
+        Time[] time = new Time[50];
+        int numArq = 0;
 
         while(!ehFim(entrada)){
+            try{
+                time[numArq] = new Time();
+                time[numArq].ler(entrada);
+                numArq++;
+            }
+            catch(IOException erro){
+                throw new IOException("Não foi possivel abrir o arquivo!");
+            }
+            entrada = leitor.nextLine();
+        }
 
+        for(int i = 0; i < numArq; i++){
+            System.out.println(time[i].nome);
         }
     }
 
-    public boolean ehFim (String entrada){
+    public static boolean ehFim (String entrada){
         boolean fim = true;
 
         if(entrada.charAt(0) != 'F' || entrada.charAt(1) != 'I' || entrada.charAt(2) != 'M')
@@ -25,13 +40,27 @@ class Times{
 
 
 class Time{
-    public String nome, apelido, estadio, tecnico, liga, nomeArquivo;
-    public int capacidade, fundacaoDia, fundacaoMes, fundacaoAno;
-    public long paginaTam;
+    protected String nome, apelido, estadio, tecnico, liga, nomeArquivo;
+    protected int capacidade, fundacaoDia, fundacaoMes, fundacaoAno;
+    protected long paginaTam;
 
     public Time() {
         nome = apelido = estadio = tecnico = liga = nomeArquivo = "";
         paginaTam = capacidade = fundacaoDia = fundacaoMes = fundacaoAno = 0;
+    }
+
+    public Time(String nome, String apelido, String estadio, String tecnico, String liga, String nomeArquivo, int capacidade, int fundacaoDia, int fundacaoMes, int fundacaoAno, long paginaTam){
+        this.nome = nome;
+        this.apelido = apelido;
+        this.estadio = estadio;
+        this.tecnico = tecnico;
+        this.liga = liga;
+        this.nomeArquivo = nomeArquivo;
+        this.capacidade = capacidade;
+        this.fundacaoAno = fundacaoAno;
+        this.fundacaoMes = fundacaoMes;
+        this.fundacaoDia = fundacaoDia;
+        this.paginaTam = paginaTam;
     }
 
     public String toString() {
@@ -107,130 +136,130 @@ class Time{
         return resp;
     }
 
-    public void ler(String nomeArquivo) throws Exception {
- 
-        FileReader file = new FileReader(nomeArquivo);
-        BufferedReader buffer = new BufferedReader(file);
-        String html = "";
-        String line = buffer.readLine();
-        while (line != null) {
-            html += line;
-            line = buffer.readLine();
-        }
- 
-        buffer.close();
-        file.close();
- 
-        html = html.substring(html.indexOf("Full name"));
-        html = html.substring(0, html.indexOf("<table style"));
-        String campos[] = html.split("<tr>");
- 
-        this.nomeArquivo = nomeArquivo;
- 
-        for (String campo : campos) {
-            // Full name
-            if (removeTags(campo).contains("Full name")) {
-                campo = removeTags(campo);
-                this.nome = campo.substring(9).trim();
- 
-                // Nickname(s)
-            } else if (removeTags(campo).contains("Nickname(s)")) {
-                campo = removeTags(campo);
-                this.apelido = campo.substring(11).trim();
- 
-                // Founded
-            } else if (removeTags(campo).toLowerCase().contains("founded")) {
-                campo = removeTags(campo.split("<br />")[0]);
-                this.fundacaoMes = this.getMes(campo.toLowerCase());
- 
-                if (this.fundacaoMes == 0) {
-                    this.fundacaoDia = 0;
-                    campo = campo.substring(7);
-                    this.fundacaoAno = Integer.parseInt(campo.substring(0, 4));
-                } else {
-                    campo = campo.substring(7);
-                    String data[] = campo.split(" ");
-                    if (data.length < 3) {
+
+    public void ler(String nomeArquivo) throws IOException{
+        try{
+            FileReader file = new FileReader(nomeArquivo);
+            BufferedReader buffer = new BufferedReader(file);
+            String html = "";
+            String line = buffer.readLine();
+            while (line != null) {
+                html += line;
+                line = buffer.readLine();
+            }
+    
+            buffer.close();
+            file.close();
+    
+            html = html.substring(html.indexOf("Full name"));
+            html = html.substring(0, html.indexOf("<table style"));
+            String campos[] = html.split("<tr>");
+    
+            this.nomeArquivo = nomeArquivo;
+    
+            for (String campo : campos) {
+                // Full name
+                if (removeTags(campo).contains("Full name")) {
+                    campo = removeTags(campo);
+                    this.nome = campo.substring(9).trim();
+    
+                    // Nickname(s)
+                }/* else if (removeTags(campo).contains("Nickname(s)")) {
+                    campo = removeTags(campo);
+                    this.apelido = campo.substring(11).trim();
+    
+                    // Founded
+                } else if (removeTags(campo).toLowerCase().contains("founded")) {
+                    campo = removeTags(campo.split("<br />")[0]);
+                    this.fundacaoMes = this.getMes(campo.toLowerCase());
+    
+                    if (this.fundacaoMes == 0) {
                         this.fundacaoDia = 0;
-                        this.fundacaoAno = Integer.parseInt(data[1].substring(0, 4));
+                        campo = campo.substring(7);
+                        this.fundacaoAno = Integer.parseInt(campo.substring(0, 4));
                     } else {
-                        if (campo.contains(",")) {
-                            this.fundacaoDia = Integer.parseInt(data[1].replace("th", "").replace(",", ""));
-                            this.fundacaoAno = Integer.parseInt(data[2].substring(0, 4));
-                        } else if (Character.isDigit(data[0].charAt(0))) {
-                            this.fundacaoDia = Integer.parseInt(data[0]);
-                            this.fundacaoAno = Integer.parseInt(data[2].substring(0, 4));
-                        } else {
+                        campo = campo.substring(7);
+                        String data[] = campo.split(" ");
+                        if (data.length < 3) {
                             this.fundacaoDia = 0;
                             this.fundacaoAno = Integer.parseInt(data[1].substring(0, 4));
+                        } else {
+                            if (campo.contains(",")) {
+                                this.fundacaoDia = Integer.parseInt(data[1].replace("th", "").replace(",", ""));
+                                this.fundacaoAno = Integer.parseInt(data[2].substring(0, 4));
+                            } else if (Character.isDigit(data[0].charAt(0))) {
+                                this.fundacaoDia = Integer.parseInt(data[0]);
+                                this.fundacaoAno = Integer.parseInt(data[2].substring(0, 4));
+                            } else {
+                                this.fundacaoDia = 0;
+                                this.fundacaoAno = Integer.parseInt(data[1].substring(0, 4));
+                            }
                         }
                     }
-                }
- 
-                // Ground
-            } else if (removeTags(campo).toLowerCase().contains("ground")) {
-                campo = removeTags(campo);
-                this.estadio = campo.substring(6).trim();
- 
-                // Capacity
-            } else if (removeTags(campo).toLowerCase().contains("capacity")) {
-                campo = campo.split("<br")[0];
-                campo = removeTags(campo.split("</td>")[0].replace(" ", ""));
-                this.capacidade = Integer.parseInt(removePunctuation(campo.substring(8).split(";")[0]));
- 
-                // Coach
-            } else if (removeTags(campo).toLowerCase().contains("coach") || campo.toLowerCase().contains("manager")) {
-                campo = removeTags(campo).replace("(es)", "").trim();
-                if (campo.toLowerCase().contains("coach")) {
-                    int index = campo.toLowerCase().indexOf("coach");
-                    this.tecnico = campo.substring(index + 5).trim();
-                } else if (campo.toLowerCase().contains("manager") && this.tecnico.isEmpty()) {
-                    int index = campo.toLowerCase().indexOf("manager");
-                    this.tecnico = campo.substring(index + 7).trim();
-                }
-                // League
-            } else if (removeTags(campo).contains("League") && this.liga.isEmpty()) {
-                campo = removeTags(campo);
-                this.liga = campo.substring(6).trim();
+    
+                    // Ground
+                } else if (removeTags(campo).toLowerCase().contains("ground")) {
+                    campo = removeTags(campo);
+                    this.estadio = estadio.substring(6).trim();
+    
+                    // Capacity
+                } else if (removeTags(campo).toLowerCase().contains("capacity")) {
+                    campo = campo.split("<br")[0];
+                    campo = removeTags(campo.split("</td>")[0].replace(" ", ""));
+                    this.capacidade = Integer.parseInt(removePunctuation(campo.substring(8).split(";")[0]));
+    
+                    // Coach
+                } else if (removeTags(campo).toLowerCase().contains("coach") || campo.toLowerCase().contains("manager")) {
+                    campo = removeTags(campo).replace("(es)", "").trim();
+                    if (campo.toLowerCase().contains("coach")) {
+                        int index = campo.toLowerCase().indexOf("coach");
+                        this.tecnico = campo.substring(index + 5).trim();
+                    } else if (campo.toLowerCase().contains("manager") && this.tecnico.isEmpty()) {
+                        int index = campo.toLowerCase().indexOf("manager");
+                        this.tecnico = campo.substring(index + 7).trim();
+                    }
+                    // League
+                } else if (removeTags(campo).contains("League") && this.liga.isEmpty()) {
+                    campo = removeTags(campo);
+                    this.liga = campo.substring(6).trim();
+                }*/
             }
+            File Arq = new File(nomeArquivo);
+            this.paginaTam = Arq.length();
+            file.close();
         }
- 
-        File f = new File(nomeArquivo);
-        this.paginaTam = f.length();
-        f.close();
+        catch(IOException erro){
+            throw new IOException("ERRO!");
+        }
     }
 
-    public removeTags(String entrada){
-
-    }
 
     public Time clone(){
-		Time novo = new Time(this.getNome(), this.getApelidos(), this.getTecnico(), this.getEstadio(), this.getLiga(), this.getNomeArquivo(), this.getDia(), this.getMes(), this.getAno(), this.getCapacidade(), this.getTamPag());
+		Time novo = new Time(nome, apelido, estadio, tecnico, liga, nomeArquivo, capacidade, fundacaoDia, fundacaoMes, fundacaoAno, paginaTam);
 		return novo;
     }
     
 
-    public removerTags(String entrada){
-        char[] textoLimpo = entrada;
-        boolean chaves = true;
+    public String removeTags(String entrada){
+        
+        boolean limpo = false;
+        int comeco = 0, fim = entrada.length();
 
-        int i;
-        int pos = 0;
-        for(i = 0; i < entrada.length(); i++){
-            if(entrada.charAt(i) == '<'){
-                chaves = true;
+        while(!limpo){
+            entrada = entrada.substring(comeco, fim);
+            comeco = entrada.indexOf("<") + 1;
+            fim = entrada.indexOf(">");
+
+            if(fim < comeco){
+                entrada = entrada.replaceAll("<([^><]*)*>", "");
             }
-            if(!chaves){
-                textoLimpo[pos] = entrada.charAt(i);
-                pos++;
-            }
-            if(entrada.charAt(i) == '>'){
-                chaves = false;
+
+            if(comeco == -1 || fim == -1){
+                limpo = true;
             }
         }
-        textoLimpo[pos] = '\0';
 
-        
+        return entrada.trim();
     }
 
     /*
