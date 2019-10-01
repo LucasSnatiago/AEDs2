@@ -84,41 +84,6 @@ void limpandoEntrada(char entrada[], char textoLimpo[]){
   }
 }
 
-/*
-//Removedor de tags HTML
-void removerTags(char entrada[]){
-  bool chaves = true;
-  int pos = 0;
-
-  for(int i = 0; i < strlen(entrada) ; i++){
-    if(entrada[i] == '<')
-      chaves = true;
-    if(!chaves){
-      entrada[pos] = entrada[i];
-      pos++;
-    }
-    if(entrada[i] == '>')
-      chaves = false;
-  }
-  entrada[pos] = '\0';
-
-  bool Ecomercial = false;
-  int pos2 = 0;
-  for(int i = 0; i < strlen(entrada); i++){
-    if(entrada[i] == '&'){
-      Ecomercial = true;
-    }
-    if(!Ecomercial){
-      entrada[pos2] = entrada[i];
-      pos2++;
-    }
-    if(entrada[i] == ';'){
-      Ecomercial = false;
-    }
-  }
-  entrada[pos2] = '\0';
-}
-*/
 
 //Removedor de tags HTML
 char* removerTags(char entrada[]){
@@ -376,7 +341,7 @@ void ORQUESTRADOR(char entrada[], Ordem lista[], int listaAtual, bool print){
   procurarItens(textoLimpo, "League", "</td></tr>", time.liga);
   procurarItens(textoLimpo, "Capacity", "</td></tr>", time.capacidade);
   procurarItens(textoLimpo, "Founded", "</td></tr>", time.data);
-  strcpy(time.tecnico, "0");	
+  //strcpy(time.tecnico, "0");	
  
 
   //Formatando prints
