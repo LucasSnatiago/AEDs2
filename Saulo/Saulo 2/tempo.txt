@@ -1,0 +1,29 @@
+# Aluno: Lucas Santiago de Oliveira
+# Matricula: 650888
+
+Contagens de tempo sequencial:
+22.302734 segundos
+22.306641 segundos
+22.275391 segundos
+22.281250 segundos
+22.265625 segundos
+22.302737 segundos
+22.305641 segundos
+22.775345 segundos
+22.634650 segundos
+22.865634 segundos
+
+Contagem de tempo paralelo:
+5.697266 segundos
+6.832031 segundos
+6.349609 segundos
+6.103516 segundos
+6.509766 segundos
+6.443359 segundos
+6.341239 segundos
+6.234546 segundos
+6.312323 segundos
+6.456775 segundos
+
+SpeedUp:
+3,654079714 vezes
