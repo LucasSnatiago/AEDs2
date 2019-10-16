@@ -1,0 +1,35 @@
+Tempo:
+
+	Sequencial:
+	0m1,263s
+	0m1,283s
+	0m1,266s
+
+	Reduction:
+	0m0,583s
+	0m0,589s
+	0m0,583s
+
+	Sessao Critica:
+	0m1,274s
+	0m1,289s
+	0m1,264s
+
+	Chunks(100/chunk):
+	0m1,251s
+	0m1,258s
+	0m1,264s
+
+	Chunks(50/chunk):
+	0m1,264s
+	0m1,262s
+	0m1,263s
+
+	Chunks(2000/chunk):
+	0m1,256s
+	0m1,259s
+	0m1,256s
+
+
+
+1)

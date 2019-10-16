@@ -159,11 +159,14 @@ class Time{
 
             //Todos os componentes estao em ordem
 
+                        
+
             for (String campo : campos) {
                 // Full name
                 if (removeTags(campo).contains("Full name")) {
                     campo = removeTags(campo);
                     this.nome = campo.substring(9).trim();
+                    continue;
     
                     // Nickname(s)
                 } else if (removeTags(campo).contains("Nickname(s)")) {
