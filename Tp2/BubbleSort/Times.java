@@ -156,7 +156,9 @@ class Time{
             String campos[] = html.split("<tr>");
     
             this.nomeArquivo = nomeArquivo;
-    
+
+            //Todos os componentes estao em ordem
+
             for (String campo : campos) {
                 // Full name
                 if (removeTags(campo).contains("Full name")) {
@@ -164,7 +166,7 @@ class Time{
                     this.nome = campo.substring(9).trim();
     
                     // Nickname(s)
-                }/* else if (removeTags(campo).contains("Nickname(s)")) {
+                } else if (removeTags(campo).contains("Nickname(s)")) {
                     campo = removeTags(campo);
                     this.apelido = campo.substring(11).trim();
     
@@ -183,7 +185,7 @@ class Time{
                         if (data.length < 3) {
                             this.fundacaoDia = 0;
                             this.fundacaoAno = Integer.parseInt(data[1].substring(0, 4));
-                        } else {
+                        }/* else {
                             if (campo.contains(",")) {
                                 this.fundacaoDia = Integer.parseInt(data[1].replace("th", "").replace(",", ""));
                                 this.fundacaoAno = Integer.parseInt(data[2].substring(0, 4));
@@ -194,7 +196,7 @@ class Time{
                                 this.fundacaoDia = 0;
                                 this.fundacaoAno = Integer.parseInt(data[1].substring(0, 4));
                             }
-                        }
+                        }*/
                     }
     
                     // Ground
@@ -222,7 +224,7 @@ class Time{
                 } else if (removeTags(campo).contains("League") && this.liga.isEmpty()) {
                     campo = removeTags(campo);
                     this.liga = campo.substring(6).trim();
-                }*/
+                }
             }
             File Arq = new File(nomeArquivo);
             this.paginaTam = Arq.length();
@@ -245,19 +247,9 @@ class Time{
         boolean limpo = false;
         int comeco = 0, fim = entrada.length();
 
-        while(!limpo){
-            entrada = entrada.substring(comeco, fim);
-            comeco = entrada.indexOf("<") + 1;
-            fim = entrada.indexOf(">");
-
-            if(fim < comeco){
-                entrada = entrada.replaceAll("<([^><]*)*>", "");
-            }
-
-            if(comeco == -1 || fim == -1){
-                limpo = true;
-            }
-        }
+        /*while(!limpo){
+            if()
+        }*/
 
         return entrada.trim();
     }
