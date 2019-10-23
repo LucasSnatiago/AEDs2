@@ -1,0 +1,30 @@
+Estatico/Dinamico/Guiado com 2000000 testes: 0.566044	0.558167	0.550592
+Estatico/Dinamico/Guiado com 4000000 testes: 1.485280	1.444375	1.443818
+
+Estatico/Dinamico/Guiado com 2000000 testes: 0.556684	0.550280	0.595404
+Estatico/Dinamico/Guiado com 4000000 testes: 1.546515	1.445965	1.445732
+
+Estatico/Dinamico/Guiado com 2000000 testes: 0.552354	0.549572	0.540813
+Estatico/Dinamico/Guiado com 4000000 testes: 1.455841	1.450838	1.460868
+
+Estatico/Dinamico/Guiado com 2000000 testes: 0.659037	0.573788	0.574796
+Estatico/Dinamico/Guiado com 4000000 testes: 1.572130	1.449204	1.443350
+
+Estatico/Dinamico/Guiado com 2000000 testes: 0.550304	0.552776	0.540831
+Estatico/Dinamico/Guiado com 4000000 testes: 1.492076	1.451866	1.445381
+
+Estatico/Dinamico/Guiado com 2000000 testes: 0.547509	0.541288	0.554848
+Estatico/Dinamico/Guiado com 4000000 testes: 1.452818	1.436133	1.439955
+
+Estatico/Dinamico/Guiado com 2000000 testes: 0.553941	0.539749	0.550839
+Estatico/Dinamico/Guiado com 4000000 testes: 1.627182	1.568049	1.523420
+
+Estatico/Dinamico/Guiado com 2000000 testes: 0.548878	0.539935	0.551072
+Estatico/Dinamico/Guiado com 4000000 testes: 1.437281	1.443168	1.444110
+
+Estatico/Dinamico/Guiado com 2000000 testes: 0.569481	0.541004	0.552119
+Estatico/Dinamico/Guiado com 4000000 testes: 1.458515	1.449064	1.520151
+
+Estatico/Dinamico/Guiado com 2000000 testes: 0.556713	0.545562	0.557093
+Estatico/Dinamico/Guiado com 4000000 testes: 1.487324	1.468298	1.470134
+
