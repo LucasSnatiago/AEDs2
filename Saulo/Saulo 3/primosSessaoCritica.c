@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <omp.h>
 
 int ehPrimo(long num) {
    long divisor;
@@ -30,8 +29,10 @@ int main() {
     soma = 0;
   else {
     soma = 1;
+    #pragma omp parallel for private (contaPrimo)
     for (n = 3; n < LIMITE_MAX; n += 2){
       contaPrimo = ehPrimo(n);
+      #pragma omp critical
       soma = soma + contaPrimo;
     }
   }

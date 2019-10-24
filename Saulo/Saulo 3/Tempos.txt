@@ -1,35 +1,35 @@
-Tempo:
+Aluno: Lucas Santiago de Oliveira
+MAtricula: 650888
 
-	Sequencial:
-	0m1,263s
-	0m1,283s
-	0m1,266s
+Questao 1:
+O speedup entre reduction e sequencial foi de 5.466027 vezes.
+O speedup entre reduction e sequencial foi de 4.874035 vezes.
+O speedup entre reduction e sequencial foi de 4.926127 vezes.
+O speedup entre reduction e sequencial foi de 5.688777 vezes.
+O speedup entre reduction e sequencial foi de 4.754743 vezes.
+O speedup entre reduction e sequencial foi de 5.217360 vezes.
+O speedup entre reduction e sequencial foi de 5.553706 vezes.
+O speedup entre reduction e sequencial foi de 4.793371 vezes.
+O speedup entre reduction e sequencial foi de 5.463877 vezes.
 
-	Reduction:
-	0m0,583s
-	0m0,589s
-	0m0,583s
+Questao 2:
+O speedup entre a sessão critica e o reduction foi de 4.823724 vezes.
+O speedup entre a sessão critica e o reduction foi de 4.890947 vezes.
+O speedup entre a sessão critica e o reduction foi de 4.725832 vezes.
+O speedup entre a sessão critica e o reduction foi de 4.760220 vezes.
+O speedup entre a sessão critica e o reduction foi de 4.700509 vezes.
+O speedup entre a sessão critica e o reduction foi de 4.702806 vezes.
+O speedup entre a sessão critica e o reduction foi de 5.014102 vezes.
+O speedup entre a sessão critica e o reduction foi de 5.027902 vezes.
+O speedup entre a sessão critica e o reduction foi de 4.422335 vezes.
+O speedup entre a sessão critica e o reduction foi de 5.590911 vezes.
 
-	Sessao Critica:
-	0m1,274s
-	0m1,289s
-	0m1,264s
+Questao 3:
+A sessão crítica ficou com um tempo relativamente grande em relação ao reduction, pois 
+a sessão critica é feita sequencialmente, cada thread irá calcular a soma e esperar a proxima thread
+para continuar o calculo. Esse tempo de espera da proxima thread aumenta bastante o tempo
+de execução do código. No caso do reduction, cada thread faz totalmente sua parte dos cálculos
+e apenas após o termino de todas, o resultado delas é somado na variavel.
 
-	Chunks(100/chunk):
-	0m1,251s
-	0m1,258s
-	0m1,264s
+Questao 4:
 
-	Chunks(50/chunk):
-	0m1,264s
-	0m1,262s
-	0m1,263s
-
-	Chunks(2000/chunk):
-	0m1,256s
-	0m1,259s
-	0m1,256s
-
-
-
-1)
