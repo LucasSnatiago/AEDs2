@@ -1,0 +1,5 @@
+Quando utilizado a sessão crítica, o processador divide o trabalho entre
+as threads, mas durante o calculo, cada thread precisa esperar a proxima para
+continuar o calculo. O caso do reduction é diferente, cada thread pega uma
+parte do for e executa-o inteiramente, apenas no final todas as partes são 
+somadas, deixando assim o código bem mais rápido.

@@ -100,17 +100,49 @@ double guided(int LIMITE_MAX) {
 
 
 int main(){
-    double Estatico = estatico(2000000);
-    double Dinamico = dynamic(2000000);
-    double Guiado = guided(2000000);
 
-    double EstaticoDobro = estatico(4000000);
-    double DinamicoDobro = dynamic(4000000);
-    double GuiadoDobro = guided(4000000);
+    double Estatico = 0;
+    double Dinamico = 0;
+    double Guiado = 0;
+
+    double EstaticoDobro = 0;
+    double DinamicoDobro = 0;
+    double GuiadoDobro = 0;
+
+    for(int i = 0; i < 10; i++){
+
+      Estatico += estatico(2000000);
+      Dinamico += dynamic(2000000);
+      Guiado += guided(2000000);
+
+      EstaticoDobro += estatico(4000000);
+      DinamicoDobro += dynamic(4000000);
+      GuiadoDobro += guided(4000000);
+
+    }
+
+    Estatico /= 10;
+    Dinamico /= 10;
+    Guiado /= 10;
+
+    EstaticoDobro /= 10;
+    DinamicoDobro /= 10;
+    GuiadoDobro /= 10;
 
 
-    printf("Estatico/Dinamico/Guiado com 2000000 testes: %lf\t%lf\t%lf\n", Estatico, Dinamico, Guiado);
-    printf("Estatico/Dinamico/Guiado com 4000000 testes: %lf\t%lf\t%lf\n", EstaticoDobro, DinamicoDobro, GuiadoDobro);
+    printf("Estatico/Dinamico/Guiado com 2000000 testes:\t%lf\t%lf\t%lf\n", Estatico, Dinamico, Guiado);
+    printf("Estatico/Dinamico/Guiado com 4000000 testes: \t%lf\t%lf\t%lf\n", EstaticoDobro, DinamicoDobro, GuiadoDobro);
 
     printf("\n");
+
+	return 0;
 }
+
+
+/*
+  Questao executada e testada!
+
+  Estatico/Dinamico/Guiado com 2000000 testes:	0.068324	0.066206	0.066190
+  Estatico/Dinamico/Guiado com 4000000 testes: 	0.178057	0.176510	0.175947
+
+*/
