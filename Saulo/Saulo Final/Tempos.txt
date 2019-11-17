@@ -1,0 +1,6 @@
+QuickSort Sequencial:
+
+Tempo medio: 0.021936 segundos, Valores ordenados: sim!
+
+
+QuickSort Paralelo:
