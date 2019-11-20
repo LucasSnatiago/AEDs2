@@ -1,0 +1,4 @@
+#Ignorar arquivos de compilacao do latex
+*.log
+*.aux
+*.gz
