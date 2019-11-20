@@ -2,8 +2,8 @@
 \usepackage[utf8]{inputenc}
 
 %opening
-\title{P, NP e NP-Completo}
-\author{Lucas Santiago}
+\title{Analise de Complexidade - P, NP e NP-Completo}
+\author{Lucas Santiago de Oliveira}
 \date{Novembro 2019}
 
 \begin{document}
@@ -11,7 +11,7 @@
 \maketitle
 
 \section{Analise de complexidade}
-A analise de complexidade é uma área da computação voltada a analisar a eficiência dos algoritmos. Com o avanço da computação é importante mensurar 
+A analise de complexidade é uma área da computação voltada a analisar a eficiência dos algoritmos. Com o avanço da computação é importante mensurar o tempo gasto durante a execução desses algoritmos. 
 
 
 \end{document}
