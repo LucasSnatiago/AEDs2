@@ -11,7 +11,11 @@
 \maketitle
 
 \section{Analise de complexidade}
-A analise de complexidade é uma área da computação voltada a analisar a eficiência dos algoritmos. Com o avanço da computação é importante mensurar o tempo gasto durante a execução desses algoritmos. 
+
+A analise de complexidade é uma área da computação e da matemática voltada a analisar a eficiência dos algoritmos. Com o avanço da computação é importante mensurar o tempo gasto durante a execução desses algoritmos. Lembrando que um algoritmo é um conjunto de instruções finitos. 
+
+\section{P, NP e NP Completo}
+
 
 
 \end{document}
