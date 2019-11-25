@@ -1,0 +1,10 @@
+// Aluno: Lucas Santiago de Oliveira
+// Matricula: 650888
+
+Fatos interessantes foram observados durante a execução desse codigo paralelo e sequencial.
+Tanto no caso do quicksort quanto no do mergesort, a melhora foi gigantesca quando paralelizada.
+Outra coisa percebida é que os tempos paralelos são muito próximos, minha hipótese é que testei
+com apenas 1000000 de itens e com a velocidade do processador, os tempos se tornavam muito proximos, pois a velocidade de calculo do processador é assustadora. Dessa forma, nota-se que 
+quando utilizados vetores pequenos, o uso da paralelização entre todos os processadores não é de 
+grande diferença, para que diferenças comecem a aparecer é necessário ter vetores bem maiores.
+

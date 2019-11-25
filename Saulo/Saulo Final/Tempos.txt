@@ -1,6 +1,119 @@
-QuickSort Sequencial:
 
-Tempo medio: 0.021936 segundos, Valores ordenados: sim!
-
-
-QuickSort Paralelo:
+Quicksort:
+Quicksort sequencial:
+Tempo medio por ordenacao: 0.004504 segundos, Valores ordenados: sim!
+Quicksort paralelo:
+Tempo medio por ordenacao: 0.003596 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.003357 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.003750 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004079 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.003410 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.003292 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.004188 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.003967 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004159 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.003427 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.003955 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.004073 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.003926 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.003859 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.003420 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.003855 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.003207 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.003916 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.003803 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.003566 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.003460 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.003400 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.003804 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.003355 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.003084 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.003596 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.003628 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.003343 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.003931 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.003828 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.003786 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.003321 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.003161 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004602 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.003884 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.003880 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.004164 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.004139 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004125 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.004254 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.004063 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.003378 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.003748 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.003218 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.003912 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.003098 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.003206 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.003730 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004125 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.003106 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Mergesort:
+Mergesort Sequencial:
+Tempo medio por ordenacao: 0.010929 segundos, Valores ordenados: sim!
+Mergesort Paralelo:
+Tempo medio por ordenacao: 0.004845 segundos, Valores ordenados: sim, nested: nao, threads: 1
+Tempo medio por ordenacao: 0.004872 segundos, Valores ordenados: sim, nested: nao, threads: 1
+Tempo medio por ordenacao: 0.004847 segundos, Valores ordenados: sim, nested: nao, threads: 1
+Tempo medio por ordenacao: 0.004874 segundos, Valores ordenados: sim, nested: nao, threads: 1
+Tempo medio por ordenacao: 0.004845 segundos, Valores ordenados: sim, nested: nao, threads: 1
+Tempo medio por ordenacao: 0.004843 segundos, Valores ordenados: sim, nested: nao, threads: 1
+Tempo medio por ordenacao: 0.004850 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.004859 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.004868 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.004859 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.004870 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.004836 segundos, Valores ordenados: sim, nested: sim, threads: 1
+Tempo medio por ordenacao: 0.004847 segundos, Valores ordenados: sim, nested: nao, threads: 2
+Tempo medio por ordenacao: 0.004841 segundos, Valores ordenados: sim, nested: nao, threads: 2
+Tempo medio por ordenacao: 0.004848 segundos, Valores ordenados: sim, nested: nao, threads: 2
+Tempo medio por ordenacao: 0.004875 segundos, Valores ordenados: sim, nested: nao, threads: 2
+Tempo medio por ordenacao: 0.004916 segundos, Valores ordenados: sim, nested: nao, threads: 2
+Tempo medio por ordenacao: 0.004851 segundos, Valores ordenados: sim, nested: nao, threads: 2
+Tempo medio por ordenacao: 0.004859 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.004849 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.004851 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.004850 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.004871 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.004877 segundos, Valores ordenados: sim, nested: sim, threads: 2
+Tempo medio por ordenacao: 0.004836 segundos, Valores ordenados: sim, nested: nao, threads: 4
+Tempo medio por ordenacao: 0.004845 segundos, Valores ordenados: sim, nested: nao, threads: 4
+Tempo medio por ordenacao: 0.004846 segundos, Valores ordenados: sim, nested: nao, threads: 4
+Tempo medio por ordenacao: 0.004844 segundos, Valores ordenados: sim, nested: nao, threads: 4
+Tempo medio por ordenacao: 0.004891 segundos, Valores ordenados: sim, nested: nao, threads: 4
+Tempo medio por ordenacao: 0.004845 segundos, Valores ordenados: sim, nested: nao, threads: 4
+Tempo medio por ordenacao: 0.004872 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004833 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004845 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004825 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004835 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004857 segundos, Valores ordenados: sim, nested: sim, threads: 4
+Tempo medio por ordenacao: 0.004889 segundos, Valores ordenados: sim, nested: nao, threads: 8
+Tempo medio por ordenacao: 0.004844 segundos, Valores ordenados: sim, nested: nao, threads: 8
+Tempo medio por ordenacao: 0.004882 segundos, Valores ordenados: sim, nested: nao, threads: 8
+Tempo medio por ordenacao: 0.004846 segundos, Valores ordenados: sim, nested: nao, threads: 8
+Tempo medio por ordenacao: 0.004849 segundos, Valores ordenados: sim, nested: nao, threads: 8
+Tempo medio por ordenacao: 0.004915 segundos, Valores ordenados: sim, nested: nao, threads: 8
+Tempo medio por ordenacao: 0.004874 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.004834 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.004866 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.004849 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.004846 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.004853 segundos, Valores ordenados: sim, nested: sim, threads: 8
+Tempo medio por ordenacao: 0.004851 segundos, Valores ordenados: sim, nested: nao, threads: 16
+Tempo medio por ordenacao: 0.004878 segundos, Valores ordenados: sim, nested: nao, threads: 16
+Tempo medio por ordenacao: 0.004854 segundos, Valores ordenados: sim, nested: nao, threads: 16
+Tempo medio por ordenacao: 0.004843 segundos, Valores ordenados: sim, nested: nao, threads: 16
+Tempo medio por ordenacao: 0.004861 segundos, Valores ordenados: sim, nested: nao, threads: 16
+Tempo medio por ordenacao: 0.004862 segundos, Valores ordenados: sim, nested: nao, threads: 16
+Tempo medio por ordenacao: 0.004839 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.004878 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.004854 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.004854 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.004857 segundos, Valores ordenados: sim, nested: sim, threads: 16
+Tempo medio por ordenacao: 0.004831 segundos, Valores ordenados: sim, nested: sim, threads: 16
