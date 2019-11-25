@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{indentfirst}
 
@@ -25,7 +25,7 @@ As classes P e NP são pensadas sobre uma máquina de Turing, que possui um conj
 
 \section{NP e NP-Completo}
 
-Por fim, temos o conjunto dos problemas NP-Completos que são os mais difíceis do do conjunto NP.
+Por fim, temos o conjunto dos problemas NP-Completos que são os mais difíceis do conjunto NP. Esse conjunto é tão complexo que para ser considerado NP-Completo é necessário que o conjunto-solução desse problema também sirva para resolver outros problemas NP ou partes de outros NP-Completos. Esse conjunto de problemas existem na computação há quase meio século. Se algum dia for possível resolvê-los, será possível provar que P = NP e reduzir o tempo de execução dos algoritmos NP ao tempo de execução dos algoritmos P. Entretanto, se não for possível resolvê-los, será provado que P != NP.
 
 
 
