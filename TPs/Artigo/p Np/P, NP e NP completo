@@ -15,6 +15,9 @@
 
 A analise de complexidade é uma área da computação e da matemática voltada a analisar a eficiência dos algoritmos. Com o avanço da computação é importante mensurar o tempo gasto durante a execução desses algoritmos. Lembrando que um algoritmo é um conjunto de instruções finitos.
 
+Em geral, esse cálculo é dividido em três partes. Sendo a primeira, melhor caso, o número mínimo de iterações para se resolver o problema. O segundo, que seria o pior caso, trata-se do número máximo de iterações necessários para se resolver o problema. E, por último, o caso médio, essa complexidade é definida com relação a uma distribuição de probabilidade sobre as entradas, aquilo que tende a acontecer mais vezes dada várias possibilidades de entrada.
+
+Por exemplo, considerando o algoritmo de ordenação quicksort. Isso resolve o problema de ordenar uma lista de inteiros que é dada como entrada. O pior caso é quando a entrada já está ordenada ou está em ordem inversa, e o algoritmo leva tempo $ \theta(n^2) $ para este caso. Se assumirmos que todas as permutações possíveis da lista de entrada são igualmente prováveis, o tempo médio necessário para a ordenação é $ \theta(n\times\log_2 n) $. O melhor caso ocorre quando cada pivô divide a lista pela metade, também precisando tempo $ \theta(n\times\log_2 n) $.
 
 \section{P, NP e NP Completo}
 
