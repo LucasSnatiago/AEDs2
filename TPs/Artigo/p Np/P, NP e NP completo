@@ -1,5 +1,6 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
 
 %opening
 \title{Analise de Complexidade - P, NP e NP-Completo}
@@ -12,7 +13,8 @@
 
 \section{Analise de complexidade}
 
-A analise de complexidade é uma área da computação e da matemática voltada a analisar a eficiência dos algoritmos. Com o avanço da computação é importante mensurar o tempo gasto durante a execução desses algoritmos. Lembrando que um algoritmo é um conjunto de instruções finitos. 
+A analise de complexidade é uma área da computação e da matemática voltada a analisar a eficiência dos algoritmos. Com o avanço da computação é importante mensurar o tempo gasto durante a execução desses algoritmos. Lembrando que um algoritmo é um conjunto de instruções finitos.
+
 
 \section{P, NP e NP Completo}
 
