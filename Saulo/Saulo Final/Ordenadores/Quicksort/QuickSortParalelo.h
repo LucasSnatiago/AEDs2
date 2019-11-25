@@ -7,7 +7,11 @@
 #include <time.h>
 
 
-void swap(int *a, int i, int j)
+//Debug
+#define debug printf("Debug!!\n")
+//#define printdec(x) printf("%d\n")
+
+void swapParallel(int *a, int i, int j)
 {
     int t = a[i];
     a[i] = a[j];
@@ -15,20 +19,20 @@ void swap(int *a, int i, int j)
 }
 
 
-int partition(int *a, int left,int right,int pivot)
+int partitionParallel(int *a, int left,int right,int pivot)
 {
     int pos, i;
-    swap(a, pivot, right);
+    swapParallel(a, pivot, right);
     pos = left;
     for(i = left; i < right; i++)
     {
         if (a[i] < a[right])
         {
-            swap(a, i, pos);
+            swapParallel(a, i, pos);
             pos++;
         }
     }
-    swap(a, right, pos);
+    swapParallel(a, right, pos);
     return pos;
 }
 
@@ -37,8 +41,9 @@ void quickParallel(int *a, int left, int right, int stop)
     if (left < right)
     {
         int pivot = (left + right) / 2;
-        int pos = partition(a,left,right,pivot);
+        int pos = partitionParallel(a,left,right,pivot);
         if (stop > 1) {     // chamadas paralelizadas
+		printf("%d\n",stop);
           #pragma omp parallel sections
           {
             #pragma omp section
@@ -54,15 +59,15 @@ void quickParallel(int *a, int left, int right, int stop)
     }
 }
 
-void quickSequential(int *a, int left, int right)
+void quickSeq(int *a, int left, int right)
 {
     if (left < right)
     {
         int pivot = (left + right) / 2;
-        int pos = partition(a,left,right,pivot);
+        int pos = partitionParallel(a,left,right,pivot);
 
-        quickSequential(a, left, pos - 1);
-        quickSequential(a, pos + 1, right);
+        quickSeq(a, left, pos - 1);
+        quickSeq(a, pos + 1, right);
     }
 }
 
@@ -83,7 +88,7 @@ void escreverValoresCompleto(double tempo, bool ordenado, int nested, int thread
     printf(", threads: %d\n", threads);
 }
 
-int QuickSortParalelo(int arranjo[], int tamanhoArranjo){
+void QuickSortParalelo(int arranjo[], int tamanhoArranjo){
     
     double inicio; 
     double fim;
@@ -96,14 +101,14 @@ int QuickSortParalelo(int arranjo[], int tamanhoArranjo){
         omp_set_num_threads(j);
         for(k = 0; k <= 1; k++){  //Setar o nested para true or false
             omp_set_nested(k); 
-            for(int stop = 2; stop <= 64; stop*=2){  
-                for(int i = 0; i < 10; i++){
+            for(int stop = 2; stop <= 32; stop*=2){  
+                //for(int i = 0; i < 10; i++){
                     inicio = omp_get_wtime();  //Inicio do cronometro
                     quickParallel(arranjo, 0, tamanhoArranjo-1, stop);  //Ordenando os valores
                     fim = omp_get_wtime();  //Fim do cronometro
                     tempoTotal = fim - inicio;
                     tempoMedio += tempoTotal;
-                }
+                //}
             }
             tempoMedio /= 10;
             bool ordenado = testar(arranjo, tamanhoArranjo);
